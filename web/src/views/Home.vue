@@ -8,6 +8,7 @@
     <Main/>
     
     <Footer/>
+    
   </v-app>
 </template>
 

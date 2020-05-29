@@ -20,9 +20,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item v-for="(child, i) in item.children" :key="i" v-on:click="navigate(item.to)" link>
-            <v-container>
-            </v-container>
+          <v-list-item v-for="(child, i) in item.children" :key="i" link>
             <v-list-item-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
             </v-list-item-action>
@@ -31,10 +29,9 @@
                 {{ child.text }}
               </v-list-item-title>
             </v-list-item-content>
-            
           </v-list-item>
         </v-list-group>
-        <v-list-item v-else :key="item.text" link>
+        <v-list-item v-else :key="item.text" v-on:click="navigate(item.to)" link>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -71,10 +68,9 @@ export default {
   }),
 
   methods: {
-    navigate() {
-      console.log("Going to " + "pathTo")
+    navigate(pathTo) {
       //this.$router.push({ path: `${pathTo}`})
-      this.$router.push({ path: `/egfwegew`})
+      this.$router.push({ path: `${pathTo}`})
     }
   }
 }
