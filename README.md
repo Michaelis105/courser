@@ -1,2 +1,2 @@
-# course-for-me
+# courser
 Online Course Registration System

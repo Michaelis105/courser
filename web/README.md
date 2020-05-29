@@ -1,4 +1,4 @@
-# course-for-me
+# courser
 
 ## Project setup - installs all dependencies (vue, vuetify, etc.) into node_modules
 ```
