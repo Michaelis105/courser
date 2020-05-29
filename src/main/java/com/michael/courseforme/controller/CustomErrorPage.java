@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Routes all requests with errors to respective paths.
  */
-/*
 @Controller
 @ControllerAdvice
 public class CustomErrorPage implements ErrorController {
@@ -49,4 +48,3 @@ public class CustomErrorPage implements ErrorController {
     }
 
 }
-*/

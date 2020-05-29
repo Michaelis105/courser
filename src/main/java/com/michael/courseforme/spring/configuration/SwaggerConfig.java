@@ -20,7 +20,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.michael.courseforme.controller"))
-                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+                .paths(PathSelectors.regex("/.*")) //.paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build()
                 .apiInfo(getApiInfo());
     }

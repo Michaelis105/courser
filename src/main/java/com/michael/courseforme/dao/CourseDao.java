@@ -1,8 +1,8 @@
-package com.michael.courseforme.service;
+package com.michael.courseforme.dao;
 
 import com.michael.courseforme.model.Course;
 
-public interface CourseService {
+public interface CourseDao {
 
     String createCourse(Course newCourse);
     Course getCourseById(String id);

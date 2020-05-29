@@ -25,6 +25,11 @@ public class Course {
         this(courseId, subject, number, courseTitle, creditCount, attributes, "", "");
     }
 
+    public Course(String subject, String number, String courseTitle, int creditCount,
+                  List<String> attributes) {
+        this("", subject, number, courseTitle, creditCount, attributes, "", "");
+    }
+
     public Course(String courseId, String subject, String number, String courseTitle, int creditCount,
                   List<String> attributes, String description, String url) {
         this.courseId = courseId;
@@ -99,5 +104,19 @@ public class Course {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", subject='" + subject + '\'' +
+                ", number='" + number + '\'' +
+                ", courseTitle='" + courseTitle + '\'' +
+                ", creditCount=" + creditCount +
+                ", attributes=" + attributes +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

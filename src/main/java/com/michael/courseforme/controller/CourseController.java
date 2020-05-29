@@ -27,26 +27,24 @@ public class CourseController {
 
     @RequestMapping(value = "/v1/course", method = RequestMethod.POST)
     @ApiOperation(value = "Creates new course.")
-    public CourseResponse createCourse(Course newCourse) {
+    public String createCourse(Course newCourse) {
         return courseService.createCourse(newCourse);
     }
 
     @RequestMapping(value = "/v1/course/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "Retrieves a course by ID.")
-    public CourseResponse getCourseById(@PathVariable("id") String id) {
+    public Course getCourseById(@PathVariable("id") String id) {
         return courseService.getCourseById(id);
     }
 
     @RequestMapping(value = "/v1/course/{id}", method = RequestMethod.PATCH)
     @ApiOperation(value = "Updates a course by ID with modified attributes.")
-    public CourseResponse getCourseById(@PathVariable("id") String id, Course modifiedCourse) {
-        return courseService.updateCourseById(id, modifiedCourse);
-    }
+    public void getCourseById(@PathVariable("id") String id, Course modifiedCourse) { courseService.updateCourseById(id, modifiedCourse); }
 
     @RequestMapping(value = "/v1/course/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Deletes a course by ID.")
-    public CourseResponse deleteCourseById(@PathVariable("id") String id) {
-        return courseService.deleteCourseById(id);
+    public void deleteCourseById(@PathVariable("id") String id) {
+        courseService.deleteCourseById(id);
     }
 
 }
