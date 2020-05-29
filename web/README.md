@@ -1,6 +1,6 @@
-# courser
+# courser-ui
 
-## Project setup - installs all dependencies (vue, vuetify, etc.) into node_modules
+## Project setup
 ```
 npm install
 ```
