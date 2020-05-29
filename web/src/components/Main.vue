@@ -1,16 +1,9 @@
 <template>
-  <v-container fluid>
-    <v-system-bar>
-      <SystemBar/>
-    </v-system-bar>
-
-    <v-progress-linear indeterminate/>
-
-    <router-link to="/profile">Go to Foo</router-link>
-    <router-link to="/settings">Go to Bar</router-link>
-
-    <router-view></router-view>
-  </v-container>
+	<v-content>
+		<v-container class="fill-height" fluid>
+			<SystemBar/>
+		</v-container>
+	</v-content>
 </template>
 
 <script>

@@ -1,17 +1,38 @@
 import Vue from 'vue'
-import Router from 'vue-router';
-import Home from './views/Home.vue'
+import VueRouter from 'vue-router'
 import vuetify from './plugins/vuetify';
+import Home from './views/Home.vue'
 
+Vue.use(VueRouter)
 
-export default new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
+const router = new VueRouter({
+	mode: 'history',
+	base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
             name: 'Home',
             component: Home
+        },
+        {
+            path: '/register',
+            name: 'Register',
+            component: () => import('./views/Register.vue')
+        },
+        {
+            path: '/status',
+            name: 'Status',
+            component: () => import('./views/Status.vue')
+        },
+        {
+            path: '/schedule',
+            name: 'Schedule',
+            component: () => import('./views/Schedule.vue')
+        },
+        {
+            path: '/plan',
+            name: 'Plan',
+            component: () => import('./views/Plan.vue')
         },
         {
             path: '/profile',
@@ -32,8 +53,8 @@ export default new Router({
 });
 
 Vue.config.productionTip = false
-Vue.use(Router)
 new Vue({
   vuetify,
+  router,
   render: h => h(Home)
 }).$mount('#home')

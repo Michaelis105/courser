@@ -1,5 +1,7 @@
 <template>
-  <span class="white--text">&copy; 2019, Version 1.0</span>    
+	<v-footer color="blue darken-3" app>
+		<span class="white--text">&copy; 2019, Version 1.0</span>    
+	</v-footer>
 </template>
 
 <script>

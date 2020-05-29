@@ -26,5 +26,10 @@
 
 export default {
   name: 'Header',
+  data() {
+    return {
+      drawer: true
+    }
+  }
 };
 </script>

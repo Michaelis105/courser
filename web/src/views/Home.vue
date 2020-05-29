@@ -1,20 +1,13 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
-      <NavigationDrawer/>
-    </v-navigation-drawer>
+    
+    <NavigationDrawer/>
+    
+    <Header/>
 
-    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" color="blue darken-3" dark app>
-      <Header/>
-    </v-app-bar>
+    <Main/>
     
-    <v-content app>
-      <Main/>
-    </v-content>
-    
-    <v-footer color="blue darken-3" app>
-      <Footer/>
-    </v-footer>
+    <Footer/>
   </v-app>
 </template>
 
@@ -26,7 +19,6 @@ import Footer from '../components/Footer'
 
 export default {
   name: 'Home',
-
   components: {
     Header,
     NavigationDrawer,

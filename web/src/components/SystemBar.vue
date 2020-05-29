@@ -1,5 +1,8 @@
 <template>
-  <span class="red--text">Semester registration has begun!</span>    
+	<v-system-bar>
+		<span class="red--text">Semester registration has begun!</span>    
+	</v-system-bar>
+  
 </template>
 
 <script>
