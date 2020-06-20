@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-
     <v-container>
       <v-form>
         <v-container>
@@ -29,28 +28,28 @@
 </template>
 
 <script>
-export default {
-  name: 'BrowseCatalog',
-  data () {
-    return {
-      hasSaved: false,
-      isEditing: null,
-      model: null,
-      creditHourRange: [0, 19],
-      subjects: [
+  export default {
+    name: 'BrowseCatalog',
+    data () {
+      return {
+        hasSaved: false,
+        isEditing: null,
+        model: null,
+        creditHourRange: [0, 19],
+        subjects: [
         { name: 'Music', abbr: 'FL', id: 1 },
         { name: 'Computer Science', abbr: 'GA', id: 2 },
         { name: 'English', abbr: 'NE', id: 3 },
         { name: 'Engineering', abbr: 'CA', id: 4 },
         { name: 'Physics', abbr: 'NY', id: 5 },
-      ],
-      levels: [
+        ],
+        levels: [
         { name: 'Associate', abbr: 'NE', id: 1 },
         { name: 'Undergraduate', abbr: 'FL', id: 2 },
         { name: 'Graduate', abbr: 'GA', id: 3 },
-      ],
-    }
-  },
+        ],
+      }
+    },
 
 /*
   methods: {

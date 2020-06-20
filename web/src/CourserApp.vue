@@ -5,17 +5,17 @@
 </template>
 
 <script>
-import Home from './views/Home';
+  import Home from './views/Home';
 
-export default {
-  name: 'CourserApp',
+  export default {
+    name: 'CourserApp',
 
-  components: {
-    Home
-  },
+    components: {
+      Home
+    },
 
-  data: () => ({
+    data: () => ({
     //
-  }),
-};
+    }),
+  };
 </script>

@@ -22,16 +22,16 @@
 </template>
 
 <script>
-export default {
-  name: 'ScheduleCreate',
-  data () {
-    return {
-      hasSaved: false,
-      isEditing: null,
-      model: null,
-      daysSelected: [],
-    }
-  },
+  export default {
+    name: 'ScheduleCreate',
+    data () {
+      return {
+        hasSaved: false,
+        isEditing: null,
+        model: null,
+        daysSelected: [],
+      }
+    },
 
 /*
   methods: {

@@ -16,12 +16,12 @@
 
 
 <script>
-export default {
-  name: 'RegisterAutomatic',
-  data () {
+  export default {
+    name: 'RegisterAutomatic',
+    data () {
       return {
         radios: 'radio-ge',
       }
+    }
   }
-}
 </script>
