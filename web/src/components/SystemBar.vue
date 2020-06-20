@@ -1,5 +1,5 @@
 <template>
-	<v-system-bar>
+	<v-system-bar app>
 		<span class="red--text">Semester registration has begun!</span>    
 	</v-system-bar>
   

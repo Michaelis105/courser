@@ -10,14 +10,14 @@ const router = new VueRouter({
 	base: process.env.BASE_URL,
     routes: [
         {
-            path: '/',
-            name: 'Home',
-            component: Home
+            path: '/register/catalog',
+            name: 'BrowseCatalog',
+            component: () => import('./views/RegisterBrowseCatalog.vue')
         },
         {
-            path: '/register',
-            name: 'Register',
-            component: () => import('./views/Register.vue')
+            path: '/register/degree',
+            name: 'RegisterDegree',
+            component: () => import('./views/RegisterDegree.vue')
         },
         {
             path: '/status',

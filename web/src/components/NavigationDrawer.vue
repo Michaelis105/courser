@@ -44,7 +44,7 @@
       </template>
     </v-list>
   </v-navigation-drawer>
-</template>
+</template>0.
 
 <script>
 
@@ -56,20 +56,24 @@ export default {
     drawer: null,
     items: [
       { icon: 'mdi-home-circle', text: 'Home', to: '/home' },
-      { icon: 'mdi-calendar-plus', text: 'Register for Classes', to: '/register' },
-      { icon: 'mdi-checkbox-multiple-marked-circle', text: 'Registration Status', to: '/status' },
       { icon: 'mdi-calendar-clock', text: 'My Schedule', to: '/schedule' },
-      { icon: 'mdi-chart-timeline', text: 'Plan Classes', to: '/plan' },
-      { heading: 'div', divider: true },
-      { heading: 'Transcripts' },
-      { icon: 'mdi-file-document', text: 'Official', to: '/transcript/official' },
-      { icon: 'mdi-file', text: 'Unofficial', to: '/transcript/official' }
+      { heading: 'Register for Classes' },
+      { icon: 'mdi-calendar-plus', text: 'Browse Course Catalog', to: '/register/catalog' },
+      { icon: 'mdi-text-box-check-outline', text: 'Use Degree Requirements', to: '/register/degree' },
+
+      { icon: 'mdi-text-box-check-outline', text: 'Temp', to: '/register/schedule' }
+      //{ icon: 'mdi-checkbox-multiple-marked-circle', text: 'Registration Status', to: '/status' },
+      
+      //{ icon: 'mdi-chart-timeline', text: 'Plan Classes', to: '/plan' },
+      //{ heading: 'div', divider: true },
+      //{ heading: 'Transcripts' },
+      //{ icon: 'mdi-file-document', text: 'Official', to: '/transcript/official' },
+      //{ icon: 'mdi-file', text: 'Unofficial', to: '/transcript/official' }
     ],
   }),
 
   methods: {
     navigate(pathTo) {
-      //this.$router.push({ path: `${pathTo}`})
       this.$router.push({ path: `${pathTo}`})
     }
   }
