@@ -1,7 +1,7 @@
 package com.michael.courser.controller;
 
-import com.michael.courser.responses.UserResponse;
-import com.michael.courser.service.UserService;
+import com.michael.courser.responses.StudentResponse;
+import com.michael.courser.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Endpoints for various user APIs
+ * Endpoints for various student APIs
  */
 @RestController
 @RequestMapping("api")
 @Api(description = "Set of endpoints for classes")
-public class UserController {
+public class StudentController {
 
-    private final Logger _log = LoggerFactory.getLogger(UserController.class);
+    private final Logger _log = LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
-    UserService userServicee;
+    StudentService studentService;
 
-    @RequestMapping(value = "/v1/user/class/{id}", method = RequestMethod.POST)
-    @ApiOperation(value = "Registers a class by ID to a student.")
-    public UserResponse registerClassById(@PathVariable("id") String id) {
-        return userServicee.registerClassById(id);
-    }
+    @RequestMapping(value = "/v1/student/schedule/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "Retrieves a student's schedule")
+    public StudentResponse getStudentSchedule(@PathVariable("sid") String scheduleId) { return studentService.getStudentSchedule(scheduleId); }
 
-    @RequestMapping(value = "/v1/user/class/{id}", method = RequestMethod.DELETE)
-    @ApiOperation(value = "Deregisters a class by ID to a student.")
-    public UserResponse deregisterClassById(@PathVariable("id") String id) {
-        return userServicee.deregisterClassById(id);
-    }
+    @RequestMapping(value = "/v1/student/class/{id}", method = RequestMethod.POST)
+    @ApiOperation(value = "Registers a class by ID to a student's schedule .")
+    public StudentResponse registerClassById(@PathVariable("cid") String courseId, @PathVariable("sid") String scheduleId) { return studentService.registerClassById(courseId, scheduleId); }
+
+    @RequestMapping(value = "/v1/student/class/{id}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "Deregisters a class by ID from a student's schedule.")
+    public StudentResponse deregisterClassById(@PathVariable("cid") String courseId, @PathVariable("sid") String scheduleId) { return studentService.deregisterClassById(courseId, scheduleId); }
 }

@@ -12,4 +12,6 @@ public interface ClassService {
 
     ClassResponse registerClassById(String id);
     ClassResponse deregisterClassById(String id);
+
+    ClassResponse getClassesByAttributes();
 }

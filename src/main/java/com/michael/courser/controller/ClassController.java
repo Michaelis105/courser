@@ -36,6 +36,12 @@ public class ClassController {
         return classService.getClassById(id);
     }
 
+    @RequestMapping(value = "/v1/class", method = RequestMethod.GET)
+    @ApiOperation(value = "Retrieves a list of classes by filtered attributes.")
+    public ClassResponse getClassesByAttributes() {
+        return classService.getClassesByAttributes();
+    }
+
     @RequestMapping(value = "/v1/class/{id}", method = RequestMethod.PATCH)
     @ApiOperation(value = "Updates a class by ID with modified attributes.")
     public ClassResponse updateClassById(@PathVariable("id") String id, Class modifiedClass) {

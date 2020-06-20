@@ -52,4 +52,11 @@ public class ClassServiceImpl implements ClassService {
         _log.trace("Exit...");
         return null;
     }
+
+    @Override
+    public ClassResponse getClassesByAttributes() {
+        _log.trace("Enter...");
+        _log.trace("Exit...");
+        return null;
+    }
 }
