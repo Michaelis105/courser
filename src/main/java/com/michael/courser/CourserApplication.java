@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * Starting point for initialization
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.michael.courser.controller", "com.michael.courser.dao", "com.michael.courser.model", "com.michael.courser.service"})
 @EnableScheduling
 @EnableCaching
 public class CourserApplication {

@@ -1,12 +1,9 @@
 package com.michael.courser.controller;
 
 import com.michael.courser.model.Class;
-import com.michael.courser.responses.ClassResponse;
 import com.michael.courser.service.ClassService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +19,14 @@ import java.util.List;
 @Api(description = "Set of endpoints for classes")
 public class ClassController {
 
-    private final Logger _log = LoggerFactory.getLogger(ClassController.class);
-
     @Autowired
     ClassService classService;
 
     @RequestMapping(value = "/v1/class", method = RequestMethod.POST)
     @ApiOperation(value = "Creates new class.")
     public ResponseEntity<Class> createClass(Class newClass) {
-        Class aNewclass = classService.createClass(newClass);
-        return (aNewclass == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(aNewclass);
+        Class aNewClass = classService.createClass(newClass);
+        return (aNewClass == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(aNewClass);
     }
 
     @RequestMapping(value = "/v1/class/{id}", method = RequestMethod.GET)
@@ -58,8 +53,8 @@ public class ClassController {
     @RequestMapping(value = "/v1/class/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Deletes a class by ID.")
     public ResponseEntity<Class> deleteClassById(@PathVariable("id") String id) {
-        Class deletedNewclass = classService.deleteClassById(id);
-        return (deletedNewclass == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(deletedNewclass);
+        Class deletedNewClass = classService.deleteClassById(id);
+        return (deletedNewClass == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(deletedNewClass);
     }
 
 }

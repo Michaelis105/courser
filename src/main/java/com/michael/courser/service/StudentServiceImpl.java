@@ -3,6 +3,7 @@ package com.michael.courser.service;
 import com.michael.courser.dao.StudentDao;
 import com.michael.courser.model.Class;
 
+import com.michael.courser.model.Schedule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     StudentDao studentDao;
+
+    @Override
+    public Schedule getStudentSchedule(String scheduleId) {
+        _log.trace("Enter...", scheduleId);
+        _log.trace("Exit...");
+        return null;
+    }
 
     @Override
     public Class registerClassById(String courseId, String scheduleId) {
