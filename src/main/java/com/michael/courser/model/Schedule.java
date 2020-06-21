@@ -2,6 +2,6 @@ package com.michael.courser.model;
 
 import java.util.List;
 
-public class StudentSchedule {
+public class Schedule {
     List<Course> courses;
 }

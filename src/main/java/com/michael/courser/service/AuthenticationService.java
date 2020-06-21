@@ -1,10 +1,10 @@
 package com.michael.courser.service;
 
-import com.michael.courser.responses.AuthenticationResponse;
+import com.michael.courser.model.SessionInfo;
 
 public interface AuthenticationService {
 
-    AuthenticationResponse login(String username, String password);
-    AuthenticationResponse logout();
+    SessionInfo login(String username, String password);
+    SessionInfo logout();
 
 }

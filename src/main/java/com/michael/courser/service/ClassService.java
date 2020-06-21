@@ -1,17 +1,18 @@
 package com.michael.courser.service;
 
 import com.michael.courser.model.Class;
-import com.michael.courser.responses.ClassResponse;
+
+import java.util.List;
 
 public interface ClassService {
 
-    ClassResponse createClass(Class newClass);
-    ClassResponse getClassById(String id);
-    ClassResponse updateClassById(String id, Class modifiedClass);
-    ClassResponse deleteClassById(String id);
+    Class createClass(Class newClass);
+    Class getClassById(String id);
+    Class updateClassById(String id, Class modifiedClass);
+    Class deleteClassById(String id);
 
-    ClassResponse registerClassById(String id);
-    ClassResponse deregisterClassById(String id);
+    Class registerClassById(String id);
+    Class deregisterClassById(String id);
 
-    ClassResponse getClassesByAttributes();
+    List<Class> getClassesByAttributes();
 }

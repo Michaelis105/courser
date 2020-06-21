@@ -1,11 +1,10 @@
 package com.michael.courser.service;
 
-import com.michael.courser.responses.StudentResponse;
+import com.michael.courser.model.Class;
 
 public interface StudentService {
 
-    StudentResponse getStudentSchedule(String scheduleId);
-    StudentResponse registerClassById(String courseId, String scheduleId);
-    StudentResponse deregisterClassById(String courseId, String scheduleId);
+    Class registerClassById(String courseId, String scheduleId);
+    Class deregisterClassById(String courseId, String scheduleId);
 
 }
