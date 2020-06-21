@@ -12,22 +12,28 @@ const router = new VueRouter({
         {
             path: '/register/catalog',
             name: 'BrowseCatalog',
-            component: () => import('./views/RegisterBrowseCatalog.vue')
+            component: () => import('./views/register/BrowseCatalog.vue')
         },
         {
             path: '/register/degree',
             name: 'RegisterDegree',
-            component: () => import('./views/RegisterDegree.vue')
+            component: () => import('./views/register/Degree.vue')
         },
+        {
+            path: '/register/schedule',
+            name: 'Schedule',
+            component: () => import('./views/register/Schedule.vue')
+        },
+        {
+            path: '/student/schedule',
+            name: 'Schedule',
+            component: () => import('./views/Schedule.vue')
+        },
+        /*
         {
             path: '/status',
             name: 'Status',
             component: () => import('./views/Status.vue')
-        },
-        {
-            path: '/schedule',
-            name: 'Schedule',
-            component: () => import('./views/Schedule.vue')
         },
         {
             path: '/plan',
@@ -49,6 +55,7 @@ const router = new VueRouter({
             name: 'Settings',
             component: () => import('./views/Settings.vue')
         }
+        */
     ]
 });
 

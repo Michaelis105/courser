@@ -44,7 +44,7 @@
     </template>
   </v-list>
 </v-navigation-drawer>
-</template>0.
+</template>
 
 <script>
 
@@ -56,12 +56,13 @@
       drawer: null,
       items: [
       { icon: 'mdi-home-circle', text: 'Home', to: '/home' },
-      { icon: 'mdi-calendar-clock', text: 'My Schedule', to: '/schedule' },
+      { icon: 'mdi-calendar-clock', text: 'My Schedule', to: '/student/schedule' },
       { heading: 'Register for Classes' },
       { icon: 'mdi-calendar-plus', text: 'Browse Course Catalog', to: '/register/catalog' },
       { icon: 'mdi-text-box-check-outline', text: 'Use Degree Requirements', to: '/register/degree' },
 
-      { icon: 'mdi-text-box-check-outline', text: 'Temp', to: '/register/schedule' }
+      //{ icon: 'mdi-text-box-check-outline', text: 'Temp', to: '/register/schedule' }
+      
       //{ icon: 'mdi-checkbox-multiple-marked-circle', text: 'Registration Status', to: '/status' },
       
       //{ icon: 'mdi-chart-timeline', text: 'Plan Classes', to: '/plan' },

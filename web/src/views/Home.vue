@@ -12,10 +12,10 @@
 </template>
 
 <script>
-  import Header from '../components/Header';
-  import NavigationDrawer from '../components/NavigationDrawer';
-  import Main from '../components/Main';
-  import Footer from '../components/Footer';
+import Header from '../components/Header';
+import NavigationDrawer from '../components/NavigationDrawer';
+import Main from '../components/Main';
+import Footer from '../components/Footer';
 
 //import SystemBar from '../components/SystemBar';
 

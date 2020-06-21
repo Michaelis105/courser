@@ -85,6 +85,10 @@
 </script>
 
 <style lang="scss">
+.v-calendar-daily_head-day-label {
+    display: none;
+}
+
 .v-current-time {
   height: 2px;
   background-color: #ea4335;
