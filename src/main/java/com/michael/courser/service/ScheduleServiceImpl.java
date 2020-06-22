@@ -13,28 +13,36 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Schedule createSchedule(Schedule newCourse) {
         _log.trace("Enter...", newCourse);
+        // TODO: IMPLEMENT
+        Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
-        return null;
+        return dummySchedule;
     }
 
     @Override
     public Schedule getScheduleById(String id) {
         _log.trace("Enter...", id);
+        // TODO: IMPLEMENT
+        Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
-        return null;
+        return dummySchedule;
     }
 
     @Override
     public Schedule updateScheduleById(String id, Schedule modifiedSchedule) {
         _log.trace("Enter...", id, modifiedSchedule);
+        // TODO: IMPLEMENT
+        Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
-        return null;
+        return dummySchedule;
     }
 
     @Override
     public Schedule deleteScheduleById(String id) {
         _log.trace("Enter...", id);
+        // TODO: IMPLEMENT
+        Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
-        return null;
+        return dummySchedule;
     }
 }

@@ -13,6 +13,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public SessionInfo login(String username, String password) {
         _log.trace("Enter...", username, password);
+        // TODO: IMPLEMENT
         _log.trace("Exit...");
         return null;
     }
@@ -20,6 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public SessionInfo logout() {
         _log.trace("Enter...");
+        // TODO: IMPLEMENT
         _log.trace("Exit...");
         return null;
     }

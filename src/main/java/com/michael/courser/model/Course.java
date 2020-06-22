@@ -20,6 +20,10 @@ public class Course {
     private String description;
     private String url;
 
+    public Course(String courseId) {
+        this(courseId, "SUBJ", "12345", "Some Title", 6, null, "No Description", "");
+    }
+
     public Course(String courseId, String subject, String number, String courseTitle, int creditCount,
                   List<String> attributes) {
         this(courseId, subject, number, courseTitle, creditCount, attributes, "", "");

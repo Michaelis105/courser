@@ -14,27 +14,30 @@ public class StudentServiceImpl implements StudentService {
 
     private final Logger _log = LoggerFactory.getLogger(StudentServiceImpl.class);
 
-    @Autowired
-    StudentDao studentDao;
+    //@Autowired
+    //StudentDao studentDao;
 
     @Override
     public Schedule getStudentSchedule(String scheduleId) {
         _log.trace("Enter...", scheduleId);
+        Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
-        return null;
+        return dummySchedule;
     }
 
     @Override
     public Class registerClassById(String courseId, String scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
+        Class dummyClass = new Class(courseId);
         _log.trace("Exit...");
-        return null;
+        return dummyClass;
     }
 
     @Override
     public Class deregisterClassById(String courseId, String scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
+        Class dummyClass = new Class(courseId);
         _log.trace("Exit...");
-        return null;
+        return dummyClass;
     }
 }

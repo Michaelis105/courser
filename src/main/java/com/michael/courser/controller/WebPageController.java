@@ -18,9 +18,9 @@ public class WebPageController {
 
     private final Logger _log = LoggerFactory.getLogger(WebPageController.class);
 
-    String dashboardPageFilename = "dashboard.html";
+    String dashboardPageFilename = "index.html";
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     @ApiOperation(value = "Renders dashboard")
     public String dashboard() {
         _log.trace("Retrieving dashboard...");

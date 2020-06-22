@@ -1,5 +1,7 @@
 package com.michael.courser.model;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,6 +29,13 @@ public class Class {
     private int seatOccupied;
     private int seatWaitlistCapacity;
     private int seatWaitlistOccupied;
+
+    public Class(String classId) {
+        this(classId, "SUM2020", "U", "C", "First Name Last Name",
+                new LinkedList<String>(Arrays.asList("dummy")),
+                new LinkedList<String>(Arrays.asList("MTWRF")),
+                0, 0, 0, 0);
+    }
 
     public Class(String classId, String term, String classType, String campus, String instructor,
                  List<String> attributes, List<String> days) {

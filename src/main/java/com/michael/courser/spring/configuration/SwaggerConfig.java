@@ -26,8 +26,8 @@ public class SwaggerConfig {
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("Course For Me")
-                .description("Course For Me Services")
+                .title("Courser")
+                .description("Courser Services")
                 .build();
     }
 }
