@@ -7,28 +7,32 @@
         </v-card-title>
 
         <v-card>
-          
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1">
+          <v-data-table :headers="classTableHeaders" :items="enrollClasses" :items-per-page="5" class="elevation-1">
+            <template v-slot:item.actions="{ item }">
+              <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-plus</v-icon>
+            </template>
             <template v-slot:top>
               You are about enroll in these courses:
+            </template>
+            <template v-slot:no-data>
+              No classes added.
             </template>
           </v-data-table>
         </v-card>
 
         <v-card>
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1">
+          <v-data-table :headers="classTableHeaders" :items="unenrollClasses" :items-per-page="5" class="elevation-1">
+            <template v-slot:item.actions="{ item }">
+              <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-minus</v-icon>
+            </template>
             <template v-slot:top>
               You are about unenroll from these courses:
             </template>
-            <template v-slot:bot>
-              You are about unenroll from these courses:
+            <template v-slot:no-data>
+              No classes removed.
             </template>
           </v-data-table>
         </v-card>
-
-        <v-card-text>
-          The resulting credit hours for this semester is: 
-        </v-card-text>
 
         <v-card-text>
           Are you sure this is the schedule you want?
@@ -53,22 +57,30 @@
 
   export default {
     name: 'ScheduleChangeConfirmation',
+    props: {
+      enrollClasses: {
+        type: Array,
+      },
+      unenrollClasses: {
+        type: Array,
+      }
+    },
 
-    data: () => ({
-      dialog: false,
-      classTableHeaders: [
-
-        { text: 'Course Number', value: 'courseNumber' },
-        { text: 'Subject', value: 'courseSubject' },
-        { text: 'Class ID', value: 'courseId' },
-        { text: 'Title', value: 'courseTitle' },
-        { text: 'Instructor', value: 'instructor' },
-        { text: 'Meeting Times', value: 'meeting' },
-        { text: 'Credit Hours', value: 'creditHours' },
-      ],
-      enrollClassses: [],
-      unenrollClassses: []
-    }),
+    data () {
+      return {
+        dialog: false,
+        classTableHeaders: [
+          { text: 'Class ID', value: 'courseId' },
+          { text: 'Subject', value: 'subject' },
+          { text: 'Course Number', value: 'number' },
+          { text: 'Title', value: 'courseTitle' },
+          { text: 'Instructor', value: 'instructor' },
+          { text: 'Meeting Times', value: 'meeting' },
+          { text: 'Credit Hours', value: 'creditHours' },
+        ],
+      }
+      
+    },
 
     methods: {
       navigate(pathTo) {

@@ -7,7 +7,7 @@
             <v-col cols="3">
               <v-card>
                 <v-subheader>Added Course Cart</v-subheader>
-                <v-data-table v-model="selected" :headers="cartHeaders" :items="courses" item-key="number" :items-per-page="5" class="elevation-1" :single-select=true show-select>
+                <v-data-table v-model="selected" :headers="courseCartHeaders" :items="courseCartItems" item-key="number" :items-per-page="5" class="elevation-1" :single-select=true show-select>
                 </v-data-table>
               </v-card>
               <v-row>
@@ -42,7 +42,7 @@
 
           <v-card>
             <v-subheader>Added Class Cart</v-subheader>
-            <v-data-table :headers="cartTableHeaders" :items="cartItems" :items-per-page="5" class="elevation-1">
+            <v-data-table :headers="classCartTableHeaders" :items="classCartItems" :items-per-page="5" class="elevation-1">
               <template v-slot:item.actions="{ item }">
                 <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-minus</v-icon>
               </template>
@@ -69,9 +69,9 @@
         </v-container>
       </v-form>
     </v-container>
-    <ScheduleChangeConfirmationDialog/>
+    <ScheduleChangeConfirmationDialog :enrollClasses="classCartItems" :unenrollClasses="removeClassesCart"></ScheduleChangeConfirmationDialog>
     <v-snackbar v-model="snackbar" :timeout=2000>
-      Course already added!
+      {{ snackbarText }}
     </v-snackbar>
   </v-container>
 </template>
@@ -94,9 +94,9 @@
         model: null,
         selected: null,
         snackbar: false,
+        snackbarText: "",
         daysSelected: ['M', 'T', 'W', 'R', 'F'],
         openOnly: false,
-        courses: [],
 
         classTableHeaders: [
           { text: 'Class ID', value: 'courseId' },
@@ -108,24 +108,23 @@
         ],
         classItems: [],
 
-        cartHeaders: [
+        courseCartHeaders: [
             { text: 'Subject', value: 'subject' },
             { text: 'Course Number', value: 'number' },
         ],
-        cartItems: [],
+        courseCartItems: [],
 
         classCartTableHeaders: [
-          { text: 'Course Number', value: 'courseNumber' },
-          { text: 'Subject', value: 'courseSubject' },
           { text: 'Class ID', value: 'courseId' },
+          { text: 'Subject', value: 'subject' },
+          { text: 'Course Number', value: 'number' },
           { text: 'Title', value: 'courseTitle' },
           { text: 'Instructor', value: 'instructor' },
           { text: 'Meeting Times', value: 'meeting' },
           { text: 'Credit Hours', value: 'creditHours' },
         ],
         classCartItems: [],
-
-
+        removeClassesCart: [],
       }
     },
     computed: {
@@ -136,40 +135,47 @@
     mounted () {
       this.ready = true
       if (this.cartCourses) {
-        this.courses = this.cartCourses
+        this.courseCartItems = this.cartCourses
       }
     },
     methods: {
       searchClasses() {
         this.classItems = []
-        console.log(this.selected[0].courseId)
-        fetch("http://localhost:8080/api/v1/class", {
-          method: "GET"
-        })
-        .then(response => response.json())
-        .then((data) => {
-          for (var i = 0; i < data.length; i++) {
-            var curClass = data[i]
-            var classTime = curClass.classTimes[0]
-            var time = classTime.day + " " + classTime.startTime + " - " + classTime.endTime;
-            var avail = curClass.seatOccupied + " of " + curClass.seatCapacity;
-            var wait = curClass.seatWaitlistOccupied + " of " + curClass.seatWaitlistCapacity;
-            var aClass = {
-                "courseId": curClass.courseId,
-                "instructor": curClass.instructor,
-                "availability": avail,
-                "meeting": time,
-                "waitlist": wait
+        if (this.selected == null) {
+          this.snackbarText = "Please select a course to search from your cart."
+          this.snackbar = true
+        } else {
+          console.log(this.selected[0].courseId)
+          fetch("http://localhost:8080/api/v1/class", {
+            method: "GET"
+          })
+          .then(response => response.json())
+          .then((data) => {
+            for (var i = 0; i < data.length; i++) {
+              var curClass = data[i]
+              var classTime = curClass.classTimes[0]
+              var time = classTime.day + " " + classTime.startTime + " - " + classTime.endTime;
+              var avail = curClass.seatOccupied + " of " + curClass.seatCapacity;
+              var wait = curClass.seatWaitlistOccupied + " of " + curClass.seatWaitlistCapacity;
+              var aClass = {
+                  "classId": curClass.classId,
+                  "courseId": curClass.courseId,
+                  "instructor": curClass.instructor,
+                  "availability": avail,
+                  "meeting": time,
+                  "waitlist": wait
+              }
+              this.classItems.push(aClass)
             }
-            this.classItems.push(aClass)
-          }
         })
+        }
       },
       addClassToCart(aClass) {
         var indexOfClass = this.classCartItems.indexOf(aClass)
         if (indexOfClass == -1) {
           this.classCartItems.push(aClass)
         } else {
+          this.snackbarText = "Class already added!"
           this.snackbar = true
         }
         
