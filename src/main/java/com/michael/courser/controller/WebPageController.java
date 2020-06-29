@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Routes to dashboard or other miscellaneous services
  */
+@CrossOrigin
 @Controller
 @Api(description = "Set of endpoints for viewing dashboards or other webpages")
 public class WebPageController {

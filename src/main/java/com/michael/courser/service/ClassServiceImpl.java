@@ -1,10 +1,13 @@
 package com.michael.courser.service;
 
 import com.michael.courser.model.Class;
+import com.michael.courser.model.ClassTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -71,9 +74,19 @@ public class ClassServiceImpl implements ClassService {
     public List<Class> getClassesByAttributes() {
         _log.trace("Enter...");
         List<Class> classList = new LinkedList<>();
-        classList.add(new Class("1"));
-        classList.add(new Class("2"));
-        classList.add(new Class("3"));
+
+        List<ClassTime> aClassTimeList = new LinkedList<>();
+        aClassTimeList.add(new ClassTime(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.MIDNIGHT));
+        Class aClass = new Class("1", "12345", "SUM2020", "G", "C",
+                "David Joyner", null, aClassTimeList, 1000, 230, 50, 0);
+
+        List<ClassTime> bClassTimeList = new LinkedList<>();
+        bClassTimeList.add(new ClassTime(DayOfWeek.MONDAY, LocalTime.of(8, 45), LocalTime.NOON));
+        Class bClass = new Class("2", "54321", "SUM2020", "U", "C",
+                "Tucker Balch", null, bClassTimeList, 750, 730, 100, 0);
+
+        classList.add(aClass);
+        classList.add(bClass);
         _log.trace("Exit...");
         return classList;
     }

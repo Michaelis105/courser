@@ -39,6 +39,8 @@ dependencies {
 
 	compile 'org.xerial:sqlite-jdbc:3.28.0'
 
+	//compile 'com.sipios:spring-search:0.2.0'
+
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 

@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Endpoints for various class APIs
  */
+@CrossOrigin
 @RestController
 @RequestMapping("api")
 @Api(description = "Set of endpoints for classes")

@@ -6,22 +6,24 @@
           Final Enrollment Confirmation
         </v-card-title>
 
-        <v-card-text>
-          You are about enroll in these courses:
-        </v-card-text>
-
         <v-card>
-          <v-subheader>Searched Classes</v-subheader>
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1"></v-data-table>
+          
+          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1">
+            <template v-slot:top>
+              You are about enroll in these courses:
+            </template>
+          </v-data-table>
         </v-card>
 
-        <v-card-text>
-          You are about unenroll from these courses:
-        </v-card-text>
-
         <v-card>
-          <v-subheader>Searched Classes</v-subheader>
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1"></v-data-table>
+          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1">
+            <template v-slot:top>
+              You are about unenroll from these courses:
+            </template>
+            <template v-slot:bot>
+              You are about unenroll from these courses:
+            </template>
+          </v-data-table>
         </v-card>
 
         <v-card-text>

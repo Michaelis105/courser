@@ -20,39 +20,36 @@ public class Class {
 
     private List<String> attributes;
 
-    // START TIME
-    // END TIME
-
-    private List<String> days;
+    private List<ClassTime> classTimes;
 
     private int seatCapacity;
     private int seatOccupied;
+
     private int seatWaitlistCapacity;
     private int seatWaitlistOccupied;
 
     public Class(String classId) {
-        this(classId, "SUM2020", "U", "C", "First Name Last Name",
-                new LinkedList<String>(Arrays.asList("dummy")),
-                new LinkedList<String>(Arrays.asList("MTWRF")),
-                0, 0, 0, 0);
+        this(classId, "1234", "SUM2020", "U", "C", "First Name Last Name",
+                new LinkedList<String>(Arrays.asList("dummy")),null, 0, 0, 0, 0);
     }
 
-    public Class(String classId, String term, String classType, String campus, String instructor,
+    public Class(String classId, String courseId, String term, String classType, String campus, String instructor,
                  List<String> attributes, List<String> days) {
-        this(classId, term, classType, campus, instructor, attributes, days,
+        this(classId, courseId, term, classType, campus, instructor, attributes, null,
                 0, 0, 0, 0);
     }
 
-    public Class(String classId, String term, String classType, String campus, String instructor,
-                 List<String> attributes, List<String> days,
+    public Class(String classId, String courseId, String term, String classType, String campus, String instructor,
+                 List<String> attributes, List<ClassTime> classTimes,
                  int seatCapacity, int seatOccupied, int seatWaitlistCapacity, int seatWaitlistOccupied) {
         this.classId = classId;
+        this.courseId = courseId;
         this.term = term;
         this.classType = classType;
         this.campus = campus;
         this.instructor = instructor;
         this.attributes = attributes;
-        this.days = days;
+        this.classTimes = classTimes;
         this.seatCapacity = seatCapacity;
         this.seatOccupied = seatOccupied;
         this.seatWaitlistCapacity = seatWaitlistCapacity;
@@ -115,13 +112,14 @@ public class Class {
         this.attributes = attributes;
     }
 
-    public List<String> getDays() {
-        return days;
+    public List<ClassTime> getClassTimes() {
+        return classTimes;
     }
 
-    public void setDays(List<String> days) {
-        this.days = days;
+    public void setClassTimes(List<ClassTime> classTimes) {
+        this.classTimes = classTimes;
     }
+
 
     public int getSeatCapacity() {
         return seatCapacity;
@@ -165,7 +163,7 @@ public class Class {
                 ", campus='" + campus + '\'' +
                 ", instructor='" + instructor + '\'' +
                 ", attributes=" + attributes +
-                ", days=" + days +
+                ", classTimes=" + classTimes +
                 ", seatCapacity=" + seatCapacity +
                 ", seatOccupied=" + seatOccupied +
                 ", seatWaitlistCapacity=" + seatWaitlistCapacity +

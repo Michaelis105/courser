@@ -20,6 +20,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Schedule getStudentSchedule(String scheduleId) {
         _log.trace("Enter...", scheduleId);
+        // TODO: IMPLEMENT
         Schedule dummySchedule = new Schedule();
         _log.trace("Exit...");
         return dummySchedule;
@@ -28,6 +29,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Class registerClassById(String courseId, String scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
+        // TODO: IMPLEMENT
         Class dummyClass = new Class(courseId);
         _log.trace("Exit...");
         return dummyClass;
@@ -36,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Class deregisterClassById(String courseId, String scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
+        // TODO: IMPLEMENT
         Class dummyClass = new Class(courseId);
         _log.trace("Exit...");
         return dummyClass;

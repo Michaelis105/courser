@@ -12,22 +12,26 @@ const router = new VueRouter({
         {
             path: '/register/catalog',
             name: 'BrowseCatalog',
-            component: () => import('./views/register/BrowseCatalog.vue')
+            component: () => import('./views/register/BrowseCatalog.vue'),
+            props: true
         },
         {
             path: '/register/degree',
             name: 'RegisterDegree',
-            component: () => import('./views/register/Degree.vue')
+            component: () => import('./views/register/Degree.vue'),
+            props: true
         },
         {
             path: '/register/schedule',
             name: 'Schedule',
-            component: () => import('./views/register/Schedule.vue')
+            component: () => import('./views/register/Schedule.vue'),
+            props: true
         },
         {
             path: '/student/schedule',
             name: 'Schedule',
-            component: () => import('./views/Schedule.vue')
+            component: () => import('./views/Schedule.vue'),
+            props: true
         },
         /*
         {

@@ -55,11 +55,11 @@
       dialog: false,
       drawer: null,
       items: [
-      { icon: 'mdi-home-circle', text: 'Home', to: '/home' },
-      { icon: 'mdi-calendar-clock', text: 'My Schedule', to: '/student/schedule' },
+      { icon: 'mdi-home-circle', text: 'Home', to: 'Home' },
+      { icon: 'mdi-calendar-clock', text: 'My Schedule', to: 'Schedule' },
       { heading: 'Register for Classes' },
-      { icon: 'mdi-calendar-plus', text: 'Browse Course Catalog', to: '/register/catalog' },
-      { icon: 'mdi-text-box-check-outline', text: 'Use Degree Requirements', to: '/register/degree' },
+      { icon: 'mdi-calendar-plus', text: 'Browse Course Catalog', to: 'BrowseCatalog' },
+      { icon: 'mdi-text-box-check-outline', text: 'Use Degree Requirements', to: 'RegisterDegree' },
 
       //{ icon: 'mdi-text-box-check-outline', text: 'Temp', to: '/register/schedule' }
       
@@ -75,7 +75,7 @@
 
     methods: {
       navigate(pathTo) {
-        this.$router.push({ path: `${pathTo}`})
+        this.$router.push({ name: `${pathTo}`})
       }
     }
   }

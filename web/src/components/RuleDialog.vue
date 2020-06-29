@@ -4,12 +4,13 @@
       <v-card>
         <v-card-title class="headline blue" primary-title>Add Rule</v-card-title>
 
-        WHO WHAT WHEN WHERE
         <!-- 
         WHO: The professor
         What: Which class, course, subject,
         When: Day(s), time periods
         Where: Class location
+
+        I do (not) want to take course on (any day, specific day(s)) (M-F) at (any time, before, after, time range)
         -->
 
         <v-card-text>

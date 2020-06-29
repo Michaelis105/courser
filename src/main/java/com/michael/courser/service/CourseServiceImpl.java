@@ -62,11 +62,26 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getCoursesByAttributes() {
         _log.trace("Enter...");
+
         // TODO: IMPLEMENT
+        Course aCourse = new Course("1234", "CS", "6460", "Educational Technology", 3, null,
+                "Heavily project-based class in which students will: deeply investigate the tools, methods, and " +
+                        "theories behind educational technology; demonstrate mastery of a subset of the field;" +
+                        " propose either implementing a tool for or conducting research in educational technology;" +
+                        " and deliver a final project along with a presentation and publication-ready paper."
+        , "https://omscs.gatech.edu/cs-6460-educational-technology");
+
+        Course bCourse = new Course("5543", "CS", "7646", "Machine Learning for Trading", 3, null,
+                "Introduces students to the real world challenges of implementing machine learning based " +
+                        "trading strategies including the algorithmic steps from information gathering to market orders. " +
+                        "The focus is on how to apply probabilistic machine learning approaches to trading decisions. " +
+                        "We consider statistical approaches like linear regression, Q-Learning, KNN, and regression " +
+                        "trees and how to apply them to actual stock trading situations."
+                , "https://omscs.gatech.edu/cs-7646-machine-learning-trading");
+
         List<Course> coursesList = new LinkedList<>();
-        coursesList.add(new Course("1"));
-        coursesList.add(new Course("2"));
-        coursesList.add(new Course("3"));
+        coursesList.add(aCourse);
+        coursesList.add(bCourse);
         _log.trace("Exit...");
         return coursesList;
     }
