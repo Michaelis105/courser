@@ -1,4 +1,4 @@
 package com.michael.courser.model;
 
-public class Student {
+public class Student extends Person {
 }

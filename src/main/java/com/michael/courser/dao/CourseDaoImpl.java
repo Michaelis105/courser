@@ -3,7 +3,9 @@ package com.michael.courser.dao;
 import com.michael.courser.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CourseDaoImpl implements CourseDao {
 
     @Autowired
@@ -16,22 +18,23 @@ public class CourseDaoImpl implements CourseDao {
     String sqlDeleteCourse = "";
 
     @Override
-    public String createCourse(Course newCourse) {
+    public Integer createCourse(Course newCourse) {
+        // NOTE: Forgo implementation for now.
         return null;
     }
 
     @Override
-    public Course getCourseById(String id) {
+    public Course getCourseById(Integer id) {
         return null;
     }
 
     @Override
-    public void updateCourseById(String id, Course modifiedCourse) {
-
+    public void updateCourseById(Integer id, Course modifiedCourse) {
+        // NOTE: Forgo implementation for now.
     }
 
     @Override
-    public void deleteCourseById(String id) {
-
+    public void deleteCourseById(Integer id) {
+        // NOTE: Forgo implementation for now.
     }
 }

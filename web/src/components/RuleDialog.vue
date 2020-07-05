@@ -3,41 +3,16 @@
     <v-dialog v-model="dialog" width="50%">
       <v-card>
         <v-card-title class="headline blue" primary-title>Add Rule</v-card-title>
-
-        <!-- 
-        WHO: The professor
-        What: Which class, course, subject,
-        When: Day(s), time periods
-        Where: Class location
-
-        I do (not) want to take course on (any day, specific day(s)) (M-F) at (any time, before, after, time range)
-        -->
-
-        <v-card-text>
-          You are about enroll in these courses:
-        </v-card-text>
-
-        <v-card>
-          <v-subheader>Searched Classes</v-subheader>
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1"></v-data-table>
-        </v-card>
-
-        <v-card-text>
-          You are about unenroll from these courses:
-        </v-card-text>
-
-        <v-card>
-          <v-subheader>Searched Classes</v-subheader>
-          <v-data-table :headers="classTableHeaders" :items-per-page="5" class="elevation-1"></v-data-table>
-        </v-card>
-
-        <v-card-text>
-          The resulting credit hours for this semester is: 
-        </v-card-text>
-
-        <v-card-text>
-          Are you sure this is the schedule you want?
-        </v-card-text>
+        <v-container>
+          I <v-select v-model="want" :items="wants" label="want or not want" solo dense></v-select>
+          to take <v-combobox v-model="subject" :items="subjects" item-text="text" label="subject" multiple chips dense></v-combobox>
+          subjects
+          with course <v-combobox v-model="course" :items="courses" item-text="text" label="course number" multiple chips dense></v-combobox>
+          on day <v-combobox v-model="day" :items="days" item-text="text" label="day(s)" multiple chips dense></v-combobox>
+          <v-select v-model="timeRel" :items="timeRels" label="before, after, or time range" solo dense></v-select>
+          <v-select v-model="time" :items="times" label="time" solo dense></v-select>
+        </v-container>
+          
 
         <v-divider></v-divider>
 
@@ -61,18 +36,55 @@
 
     data: () => ({
       dialog: false,
-      classTableHeaders: [
 
-        { text: 'Course Number', value: 'courseNumber' },
-        { text: 'Subject', value: 'courseSubject' },
-        { text: 'Class ID', value: 'courseId' },
-        { text: 'Title', value: 'courseTitle' },
-        { text: 'Instructor', value: 'instructor' },
-        { text: 'Meeting Times', value: 'meeting' },
-        { text: 'Credit Hours', value: 'creditHours' },
+      want: null,
+      wants: [
+        { text: 'want', value: 'w' },
+        { text: 'do not want', value: 'dnw' },
       ],
-      enrollClassses: [],
-      unenrollClassses: []
+
+      subject: [],
+      subjects: [
+        { text: 'any', value: 'any' },
+        { text: 'CS', value: 'cs' },
+        { text: 'ENG', value: 'en' },
+        { text: 'PHY', value: 'phy' },
+      ],
+
+      course: [],
+      courses: [
+        { text: 'any', value: 'any' },
+        { text: '1352', value: 'w' },
+        { text: '2467', value: 'w' },
+        { text: '3845', value: 'w' },
+        { text: '4234', value: 'dnw' },
+      ],
+
+      day: [],
+      days: [
+        { text: 'any', value: 'any' },
+        { text: 'Monday', value: 'm' },
+        { text: 'Tuesday', value: 't' },
+        { text: 'Wednesday', value: 'w' },
+        { text: 'Thursday', value: 'r' },
+        { text: 'Friday', value: 'f' },
+        { text: 'Saturday', value: 'sa' },
+        { text: 'Sunday', value: 'su' },
+      ],
+
+      timeRel: [],
+      timeRels: [
+        { text: 'any', value: 'any' },
+        { text: 'before', value: 'b' },
+        { text: 'after', value: 'af' },
+        { text: 'time range', value: 'tr' },
+      ],
+
+      time: [],
+      times: [
+        { text: 'any', value: 'any' },
+        { text: '12:00', value: '12' },
+      ],
     }),
   }
 </script>

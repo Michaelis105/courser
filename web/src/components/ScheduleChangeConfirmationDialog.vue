@@ -6,38 +6,40 @@
           Final Enrollment Confirmation
         </v-card-title>
 
-        <v-card>
-          <v-data-table :headers="classTableHeaders" :items="enrollClasses" :items-per-page="5" class="elevation-1">
-            <template v-slot:item.actions="{ item }">
-              <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-plus</v-icon>
-            </template>
-            <template v-slot:top>
-              You are about enroll in these courses:
-            </template>
-            <template v-slot:no-data>
-              No classes added.
-            </template>
-          </v-data-table>
-        </v-card>
+        <v-container>
+          <v-card>
+            <v-data-table :headers="classTableHeaders" :items="enrollClasses" :items-per-page="5" class="elevation-1">
+              <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-plus</v-icon>
+              </template>
+              <template v-slot:top>
+                You are about enroll in these courses:
+              </template>
+              <template v-slot:no-data>
+                No classes added.
+              </template>
+            </v-data-table>
+          </v-card>
 
-        <v-card>
-          <v-data-table :headers="classTableHeaders" :items="unenrollClasses" :items-per-page="5" class="elevation-1">
-            <template v-slot:item.actions="{ item }">
-              <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-minus</v-icon>
-            </template>
-            <template v-slot:top>
-              You are about unenroll from these courses:
-            </template>
-            <template v-slot:no-data>
-              No classes removed.
-            </template>
-          </v-data-table>
-        </v-card>
+          <v-card>
+            <v-data-table :headers="classTableHeaders" :items="unenrollClasses" :items-per-page="5" class="elevation-1">
+              <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="removeClassFromCart(item)">mdi-minus</v-icon>
+              </template>
+              <template v-slot:top>
+                You are about unenroll from these courses:
+              </template>
+              <template v-slot:no-data>
+                No classes removed.
+              </template>
+            </v-data-table>
+          </v-card>
 
-        <v-card-text>
-          Are you sure this is the schedule you want?
-        </v-card-text>
-
+          <v-card-text>
+            Are you sure this is the schedule you want?
+          </v-card-text>
+        </v-container>
+        
         <v-divider></v-divider>
 
         <v-card-actions>

@@ -1,19 +1,27 @@
 <template>
   <v-container fluid>
 
-    <div class="text">Tell us how you want to customize your course schedule.</div>
+    <div class="text">Tell us how you want to customize your class schedule.</div>
 
     <div class="text-h2">What is your focus for this semester?</div>
-    <v-radio-group v-model="radios" :mandatory="false">
+    <v-radio-group v-model="radiosFocus" :mandatory="false">
       <v-radio label="More General Education" value="radio-ge"></v-radio>
       <v-radio label="More In-Major" value="radio-major"></v-radio>
       <v-radio label="Balanced" value="radio-bal"></v-radio>
     </v-radio-group>
 
     <div class="text-h2">How many credits do you want to take this semester?</div>
+    <v-radio-group v-model="radiosCredits" :mandatory="false">
+      <v-radio label="Part-Time" value="radio-pt"></v-radio>
+      <v-radio label="Full-Time Light (12-13)" value="radio-ftl"></v-radio>
+      <v-radio label="Full-Time Regular (14-16)" value="radio-ftr"></v-radio>
+      <v-radio label="Full-Time Heavy (17-19)" value="radio-fth"></v-radio>
+    </v-radio-group>
+    <!--
     <v-card-text>
       <v-range-slider v-model="creditHourRange" step="1" ticks="always" :max="19" thumb-label="always"></v-range-slider>
     </v-card-text>
+    -->
 
     <div class="text-h2">What other circumstances do you want to consider?</div>
     <RuleDialog/>
@@ -25,9 +33,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+          <tr v-for="item in rules" :key="item.name">
+            <!--<td>{{ item.name }}</td>-->
           </tr>
         </tbody>
       </template>
@@ -54,7 +61,8 @@
       return {
         daysSelected: [],
         creditHourRange: [0, 19],
-        radios: 'radio-ge',
+        radiosFocus: 'radio-ge',
+        radiosCredits: 'radio-ftr',
         rules: [],
       }
     },

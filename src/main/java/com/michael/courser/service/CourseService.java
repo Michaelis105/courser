@@ -7,9 +7,9 @@ import java.util.List;
 public interface CourseService {
 
     Course createCourse(Course newCourse);
-    Course getCourseById(String id);
-    Course updateCourseById(String id, Course modifiedCourse);
-    Course deleteCourseById(String id);
+    Course getCourseById(Integer id);
+    Course updateCourseById(Integer id, Course modifiedCourse);
+    Course deleteCourseById(Integer id);
 
     List<Course> getCoursesByAttributes();
 

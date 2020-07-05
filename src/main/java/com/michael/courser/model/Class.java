@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Class {
 
-    private String classId;
-    private String courseId;
+    private Integer classId;
+    private Integer courseId;
     private String term;
 
     private String classType;
@@ -28,18 +28,18 @@ public class Class {
     private int seatWaitlistCapacity;
     private int seatWaitlistOccupied;
 
-    public Class(String classId) {
-        this(classId, "1234", "SUM2020", "U", "C", "First Name Last Name",
+    public Class(Integer classId) {
+        this(classId, 1234, "SUM2020", "U", "C", "First Name Last Name",
                 new LinkedList<String>(Arrays.asList("dummy")),null, 0, 0, 0, 0);
     }
 
-    public Class(String classId, String courseId, String term, String classType, String campus, String instructor,
+    public Class(Integer classId, Integer courseId, String term, String classType, String campus, String instructor,
                  List<String> attributes, List<String> days) {
         this(classId, courseId, term, classType, campus, instructor, attributes, null,
                 0, 0, 0, 0);
     }
 
-    public Class(String classId, String courseId, String term, String classType, String campus, String instructor,
+    public Class(Integer classId, Integer courseId, String term, String classType, String campus, String instructor,
                  List<String> attributes, List<ClassTime> classTimes,
                  int seatCapacity, int seatOccupied, int seatWaitlistCapacity, int seatWaitlistOccupied) {
         this.classId = classId;
@@ -56,19 +56,19 @@ public class Class {
         this.seatWaitlistOccupied = seatWaitlistOccupied;
     }
 
-    public String getClassId() {
+    public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(String classId) {
+    public void setClassId(Integer classId) {
         this.classId = classId;
     }
 
-    public String getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
     }
 
@@ -119,7 +119,6 @@ public class Class {
     public void setClassTimes(List<ClassTime> classTimes) {
         this.classTimes = classTimes;
     }
-
 
     public int getSeatCapacity() {
         return seatCapacity;

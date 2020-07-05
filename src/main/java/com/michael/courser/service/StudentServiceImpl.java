@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
     //StudentDao studentDao;
 
     @Override
-    public Schedule getStudentSchedule(String scheduleId) {
+    public Schedule getStudentSchedule(Integer scheduleId) {
         _log.trace("Enter...", scheduleId);
         // TODO: IMPLEMENT
         Schedule dummySchedule = new Schedule();
@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Class registerClassById(String courseId, String scheduleId) {
+    public Class registerClassById(Integer courseId, Integer scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
         // TODO: IMPLEMENT
         Class dummyClass = new Class(courseId);
@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Class deregisterClassById(String courseId, String scheduleId) {
+    public Class deregisterClassById(Integer courseId, Integer scheduleId) {
         _log.trace("Enter...", courseId, scheduleId);
         // TODO: IMPLEMENT
         Class dummyClass = new Class(courseId);

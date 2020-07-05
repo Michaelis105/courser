@@ -7,34 +7,34 @@ import java.util.List;
  */
 public class Course {
 
-    private String courseId;
+    private Integer courseId;
     private String subject;
-    private String number;
+    private Integer number;
 
     private String courseTitle;
 
-    private int creditCount;
+    private Integer creditCount;
 
     private List<String> attributes;
 
     private String description;
     private String url;
 
-    public Course(String courseId) {
-        this(courseId, "SUBJ", "12345", "Some Title", 6, null, "No Description", "");
+    public Course(Integer courseId) {
+        this(courseId, "SUBJ", 12345, "Some Title", 6, null, "No Description", "");
     }
 
-    public Course(String courseId, String subject, String number, String courseTitle, int creditCount,
+    public Course(Integer courseId, String subject, Integer number, String courseTitle, int creditCount,
                   List<String> attributes) {
         this(courseId, subject, number, courseTitle, creditCount, attributes, "", "");
     }
 
-    public Course(String subject, String number, String courseTitle, int creditCount,
+    public Course(String subject, Integer number, String courseTitle, int creditCount,
                   List<String> attributes) {
-        this("", subject, number, courseTitle, creditCount, attributes, "", "");
+        this(1234, subject, number, courseTitle, creditCount, attributes, "", "");
     }
 
-    public Course(String courseId, String subject, String number, String courseTitle, int creditCount,
+    public Course(Integer courseId, String subject, Integer number, String courseTitle, int creditCount,
                   List<String> attributes, String description, String url) {
         this.courseId = courseId;
         this.subject = subject;
@@ -46,11 +46,11 @@ public class Course {
         this.url = url;
     }
 
-    public String getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
     }
 
@@ -62,11 +62,11 @@ public class Course {
         this.subject = subject;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 

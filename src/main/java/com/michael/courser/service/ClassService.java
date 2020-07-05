@@ -7,12 +7,12 @@ import java.util.List;
 public interface ClassService {
 
     Class createClass(Class newClass);
-    Class getClassById(String id);
-    Class updateClassById(String id, Class modifiedClass);
-    Class deleteClassById(String id);
+    Class getClassById(Integer id);
+    Class updateClassById(Integer id, Class modifiedClass);
+    Class deleteClassById(Integer id);
 
-    Class registerClassById(String id);
-    Class deregisterClassById(String id);
+    Class registerClassById(Integer id);
+    Class deregisterClassById(Integer id);
 
     List<Class> getClassesByAttributes();
 }

@@ -5,9 +5,9 @@ import com.michael.courser.model.Schedule;
 
 public interface StudentService {
 
-    Schedule getStudentSchedule(String scheduleId);
+    Schedule getStudentSchedule(Integer scheduleId);
 
-    Class registerClassById(String courseId, String scheduleId);
-    Class deregisterClassById(String courseId, String scheduleId);
+    Class registerClassById(Integer courseId, Integer scheduleId);
+    Class deregisterClassById(Integer courseId, Integer scheduleId);
 
 }

@@ -20,7 +20,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule getScheduleById(String id) {
+    public Schedule getScheduleById(Integer id) {
         _log.trace("Enter...", id);
         // TODO: IMPLEMENT
         Schedule dummySchedule = new Schedule();
@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule updateScheduleById(String id, Schedule modifiedSchedule) {
+    public Schedule updateScheduleById(Integer id, Schedule modifiedSchedule) {
         _log.trace("Enter...", id, modifiedSchedule);
         // TODO: IMPLEMENT
         Schedule dummySchedule = new Schedule();
@@ -38,7 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule deleteScheduleById(String id) {
+    public Schedule deleteScheduleById(Integer id) {
         _log.trace("Enter...", id);
         // TODO: IMPLEMENT
         Schedule dummySchedule = new Schedule();

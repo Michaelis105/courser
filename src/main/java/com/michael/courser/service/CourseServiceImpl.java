@@ -24,37 +24,37 @@ public class CourseServiceImpl implements CourseService {
         _log.trace("Enter...", newCourse);
         //String newCourseId = courseDao.createCourse(newCourse);
         // TODO: IMPLEMENT
-        Course dummyCourse = new Course("CREATE" + newCourse.getCourseId());
+        Course dummyCourse = new Course(newCourse.getCourseId());
         _log.trace("Exit...");
         return dummyCourse;
     }
 
     @Override
-    public Course getCourseById(String id) {
+    public Course getCourseById(Integer id) {
         _log.trace("Enter...", id);
         //Course course = courseDao.getCourseById(id);
         // TODO: IMPLEMENT
-        Course dummyCourse = new Course("GET" + id);
+        Course dummyCourse = new Course(id);
         _log.trace("Exit...");
         return dummyCourse;
     }
 
     @Override
-    public Course updateCourseById(String id, Course modifiedCourse) {
+    public Course updateCourseById(Integer id, Course modifiedCourse) {
         _log.trace("Enter...", id, modifiedCourse);
         //courseDao.updateCourseById(id, modifiedCourse);
         // TODO: IMPLEMENT
-        Course dummyCourse = new Course("UPDATE" + id);
+        Course dummyCourse = new Course(id);
         _log.trace("Exit...");
         return dummyCourse;
     }
 
     @Override
-    public Course deleteCourseById(String id) {
+    public Course deleteCourseById(Integer id) {
         _log.trace("Enter...", id);
         //courseDao.deleteCourseById(id);
         // TODO: IMPLEMENT
-        Course dummyCourse = new Course("DELETE" + id);
+        Course dummyCourse = new Course(id);
         _log.trace("Exit...");
         return dummyCourse;
     }
@@ -64,14 +64,14 @@ public class CourseServiceImpl implements CourseService {
         _log.trace("Enter...");
 
         // TODO: IMPLEMENT
-        Course aCourse = new Course("1234", "CS", "6460", "Educational Technology", 3, null,
+        Course aCourse = new Course(1234, "CS", 6460, "Educational Technology", 3, null,
                 "Heavily project-based class in which students will: deeply investigate the tools, methods, and " +
                         "theories behind educational technology; demonstrate mastery of a subset of the field;" +
                         " propose either implementing a tool for or conducting research in educational technology;" +
                         " and deliver a final project along with a presentation and publication-ready paper."
         , "https://omscs.gatech.edu/cs-6460-educational-technology");
 
-        Course bCourse = new Course("5543", "CS", "7646", "Machine Learning for Trading", 3, null,
+        Course bCourse = new Course(5543, "CS", 7646, "Machine Learning for Trading", 3, null,
                 "Introduces students to the real world challenges of implementing machine learning based " +
                         "trading strategies including the algorithmic steps from information gathering to market orders. " +
                         "The focus is on how to apply probabilistic machine learning approaches to trading decisions. " +

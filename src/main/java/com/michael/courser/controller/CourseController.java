@@ -48,7 +48,10 @@ public class CourseController {
         _log.trace("Enter...", id);
         Course someCourse;
         try {
-            someCourse = courseService.getCourseById(id);
+            int intId = Integer.valueOf(id);
+            someCourse = courseService.getCourseById(intId);
+        } catch (NumberFormatException nfe) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -76,7 +79,10 @@ public class CourseController {
         _log.trace("Enter...", id, modifiedCourse);
         Course aModifiedCourse;
         try {
-            aModifiedCourse = courseService.updateCourseById(id, modifiedCourse);
+            int intId = Integer.valueOf(id);
+            aModifiedCourse = courseService.updateCourseById(intId, modifiedCourse);
+        } catch (NumberFormatException nfe) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -90,7 +96,10 @@ public class CourseController {
         _log.trace("Enter...", id);
         Course deletedCourse;
         try {
-            deletedCourse = courseService.deleteCourseById(id);
+            int intId = Integer.valueOf(id);
+            deletedCourse = courseService.deleteCourseById(intId);
+        } catch (NumberFormatException nfe) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

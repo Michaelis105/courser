@@ -34,7 +34,8 @@ public class StudentController {
         _log.trace("Enter...", scheduleId);
         Schedule someSchedule;
         try {
-            someSchedule = studentService.getStudentSchedule(scheduleId);
+            int intId = Integer.valueOf(scheduleId);
+            someSchedule = studentService.getStudentSchedule(intId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -48,7 +49,11 @@ public class StudentController {
         _log.trace("Enter...", courseId, scheduleId);
         Class someClass;
         try {
-            someClass = studentService.registerClassById(courseId, scheduleId);
+            int intCourseId = Integer.valueOf(courseId);
+            int intScheduleId = Integer.valueOf(scheduleId);
+            someClass = studentService.registerClassById(intCourseId, intScheduleId);
+        } catch (NumberFormatException nfe) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -62,7 +67,11 @@ public class StudentController {
         _log.trace("Enter...", courseId, scheduleId);
         Class someClass;
         try {
-            someClass = studentService.deregisterClassById(courseId, scheduleId);
+            int intCourseId = Integer.valueOf(courseId);
+            int intScheduleId = Integer.valueOf(scheduleId);
+            someClass = studentService.deregisterClassById(intCourseId, intScheduleId);
+        } catch (NumberFormatException nfe) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
