@@ -45,13 +45,11 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<Course> getCoursesByAttributes(String subject, String number, String title, String credit) {
         Map<String, String> params = new HashMap<>();
-        params.put("subject", subject);
-        params.put("number", number);
-        params.put("title", title + "%");
-        params.put("credit", credit);
+
         String sqlByAttributes = sqlGetCourseRoot + " WHERE ";
         List<String> cond = new LinkedList<>();
         if (subject != null && !subject.isBlank()) {
+            params.put("subject", subject);
             cond.add("SUBJECT=:subject");
         }
 
@@ -61,16 +59,19 @@ public class CourseDaoImpl implements CourseDao {
                 params.put("number", number + "%");
                 cond.add("NUMBER LIKE :number");
             } else {
+                params.put("number", number);
                 cond.add("NUMBER=:number");
             }
 
         }
 
         if (title != null && !title.isBlank()) {
+            params.put("title", title + "%");
             cond.add("TITLE LIKE :title");
         }
 
         if (credit != null && !credit.isBlank()) {
+            params.put("credit", credit);
             cond.add("CREDIT=:credit");
         }
 

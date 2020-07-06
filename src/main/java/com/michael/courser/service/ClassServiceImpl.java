@@ -75,10 +75,12 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<Class> getClassesByAttributes() {
+    public List<Class> getClassesByAttributes(String courseId, String instructor, List<Character> days, String beginTime, String endTime, Boolean isAvailable) {
         _log.trace("Enter...");
-        List<Class> classList = new LinkedList<>();
+        List<Class> classList = classDao.getClassesByAttributes(courseId, instructor, days, beginTime, endTime, isAvailable);
 
+        /*
+        Dummy data
         List<ClassTime> aClassTimeList = new LinkedList<>();
         aClassTimeList.add(new ClassTime(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.MIDNIGHT));
         Class aClass = new Class(1, 12345, "SUM2020", "G", "C",
@@ -91,6 +93,7 @@ public class ClassServiceImpl implements ClassService {
 
         classList.add(aClass);
         classList.add(bClass);
+         */
         _log.trace("Exit...");
         return classList;
     }
