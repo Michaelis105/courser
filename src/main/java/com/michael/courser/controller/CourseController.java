@@ -61,11 +61,15 @@ public class CourseController {
 
     @RequestMapping(value = "/v1/course", method = RequestMethod.GET)
     @ApiOperation(value = "Retrieves a list of courses by filtered attributes.")
-    public ResponseEntity<List<Course>> getCoursesByAttributes() {
+    public ResponseEntity<List<Course>> getCoursesByAttributes(
+            @RequestParam(value = "s", required = true) String subject,
+            @RequestParam(value = "n", required = false) String number,
+            @RequestParam(value = "t", required = false) String title,
+            @RequestParam(value = "c", required = false) String credit) {
         _log.trace("Enter...");
         List<Course> someCourse;
         try {
-            someCourse = courseService.getCoursesByAttributes();
+            someCourse = courseService.getCoursesByAttributes(subject, number, title, credit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

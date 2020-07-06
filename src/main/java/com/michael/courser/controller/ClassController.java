@@ -51,8 +51,10 @@ public class ClassController {
             int intId = Integer.valueOf(id);
             someClass = classService.getClassById(intId);
         } catch (NumberFormatException nfe) {
+            _log.error("Number format error with " + id, nfe);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
+            _log.error("General internal server error with " + id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         _log.trace("Exit...", someClass);

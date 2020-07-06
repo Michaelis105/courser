@@ -1,14 +1,11 @@
 package com.michael.courser.dao;
 
 import com.michael.courser.model.Class;
+import com.michael.courser.model.ClassRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +17,10 @@ public class ClassDaoImpl implements ClassDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     String sqlGetLastAutoIncrementValue = "select last_insert_rowid();";
-    String sqlInsertCourse = "";
-    String sqlGetCourseById = "SELECT * FROM CLASS WHERE ID=:id";
-    String sqlUpdateCourse = "";
-    String sqlDeleteCourse = "";
+    String sqlInsertClass = "";
+    String sqlGetClassById = "SELECT * FROM CLASS WHERE ID=:id";
+    String sqlUpdateClass = "";
+    String sqlDeleteClass = "";
 
 
     @Override
@@ -33,33 +30,16 @@ public class ClassDaoImpl implements ClassDao {
     }
 
     @Override
-    public List<Class> getClassById(Integer id) {
-
+    public Class getClassById(Integer id) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id.toString());
-        return jdbcTemplate.query(sqlGetCourseById, new RowMapper<Class>() {
+        return jdbcTemplate.queryForObject(sqlGetClassById, params, new ClassRowMapper());
+    }
 
-            @Override
-            public Class mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Class aClass = new Class(rs.getInt("id"));
-                aClass.setCourseId(rs.getInt("course_id"));
-                aClass.setTerm(String.valueOf(rs.getInt("term_id")));
-                aClass.setClassType(String.valueOf(rs.getInt("class_type")));
-                aClass.setCampus(String.valueOf(rs.getInt("campus")));
-                aClass.setInstructor(rs.getString("instructor"));
-
-                //aClass.setCourseId(rs.getInt("days"));
-                //aClass.setCourseId(rs.getInt("class_time_begin"));
-                //aClass.setCourseId(rs.getInt("class_time_end"));
-
-                aClass.setSeatCapacity(rs.getInt("seat_capacity"));
-                aClass.setSeatOccupied(rs.getInt("seat_occupied"));
-                aClass.setSeatWaitlistCapacity(rs.getInt("seat_waitlist_capacity"));
-                aClass.setSeatOccupied(rs.getInt("seat_waitlist_occupied"));
-                return aClass;
-            }
-        });
-        //List<ClassTime> classTimes,
+    @Override
+    public List<Class> getClassesByAttributes(Integer id) {
+        // TODO: Implement
+        return null;
     }
 
     @Override

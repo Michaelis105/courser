@@ -16,14 +16,14 @@ public class CourseServiceImpl implements CourseService {
 
     private final Logger _log = LoggerFactory.getLogger(ClassServiceImpl.class);
 
-    //@Autowired
-    //CourseDao courseDao;
+    @Autowired
+    CourseDao courseDao;
 
     @Override
     public Course createCourse(Course newCourse) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", newCourse);
         //String newCourseId = courseDao.createCourse(newCourse);
-        // TODO: IMPLEMENT
         Course dummyCourse = new Course(newCourse.getCourseId());
         _log.trace("Exit...");
         return dummyCourse;
@@ -32,18 +32,16 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getCourseById(Integer id) {
         _log.trace("Enter...", id);
-        //Course course = courseDao.getCourseById(id);
-        // TODO: IMPLEMENT
-        Course dummyCourse = new Course(id);
+        Course course = courseDao.getCourseById(id);
         _log.trace("Exit...");
-        return dummyCourse;
+        return course;
     }
 
     @Override
     public Course updateCourseById(Integer id, Course modifiedCourse) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", id, modifiedCourse);
         //courseDao.updateCourseById(id, modifiedCourse);
-        // TODO: IMPLEMENT
         Course dummyCourse = new Course(id);
         _log.trace("Exit...");
         return dummyCourse;
@@ -51,19 +49,22 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course deleteCourseById(Integer id) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", id);
         //courseDao.deleteCourseById(id);
-        // TODO: IMPLEMENT
         Course dummyCourse = new Course(id);
         _log.trace("Exit...");
         return dummyCourse;
     }
 
     @Override
-    public List<Course> getCoursesByAttributes() {
+    public List<Course> getCoursesByAttributes(String subject, String number, String title, String credit) {
         _log.trace("Enter...");
 
-        // TODO: IMPLEMENT
+        List<Course> coursesList = courseDao.getCoursesByAttributes(subject, number, title, credit);
+
+        /*
+        Dummy data
         Course aCourse = new Course(1234, "CS", 6460, "Educational Technology", 3, null,
                 "Heavily project-based class in which students will: deeply investigate the tools, methods, and " +
                         "theories behind educational technology; demonstrate mastery of a subset of the field;" +
@@ -82,6 +83,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> coursesList = new LinkedList<>();
         coursesList.add(aCourse);
         coursesList.add(bCourse);
+         */
         _log.trace("Exit...");
         return coursesList;
     }

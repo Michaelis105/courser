@@ -7,7 +7,8 @@ import java.util.List;
 public interface ClassDao {
 
     Integer createClass(Class newClass);
-    List<Class> getClassById(Integer id);
+    Class getClassById(Integer id);
+    List<Class> getClassesByAttributes(Integer id);
     void updateClassById(Integer id, Class modifiedClass);
     void deleteClassById(Integer id);
 

@@ -23,8 +23,8 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public Class createClass(Class newClass) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", newClass);
-        // TODO: IMPLEMENT
         Class dummyClass = new Class(newClass.getClassId());
         _log.trace("Exit...");
         return dummyClass;
@@ -33,16 +33,15 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public Class getClassById(Integer id) {
         _log.trace("Enter...", id);
-        // TODO: IMPLEMENT
-        Class dummyClass = new Class(id);
+        Class c = classDao.getClassById(id);
         _log.trace("Exit...");
-        return dummyClass;
+        return c;
     }
 
     @Override
     public Class updateClassById(Integer id, Class modifiedClass) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", id, modifiedClass);
-        // TODO: IMPLEMENT
         Class dummyClass = new Class(id);
         _log.trace("Exit...");
         return dummyClass;
@@ -50,8 +49,8 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public Class deleteClassById(Integer id) {
+        // NOTE: Forgo implementation for now.
         _log.trace("Enter...", id);
-        // TODO: IMPLEMENT
         Class dummyClass = new Class(id);
         _log.trace("Exit...");
         return dummyClass;
