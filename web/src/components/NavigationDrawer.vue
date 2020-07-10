@@ -55,8 +55,8 @@
       dialog: false,
       drawer: null,
       items: [
-      { icon: 'mdi-home-circle', text: 'Home', to: 'Home' },
-      { icon: 'mdi-calendar-clock', text: 'My Schedule', to: 'Schedule' },
+      //{ icon: 'mdi-home-circle', text: 'Home', to: 'Home' },
+      //{ icon: 'mdi-calendar-clock', text: 'My Schedule', to: 'Schedule' },
       { heading: 'Register for Classes' },
       { icon: 'mdi-calendar-plus', text: 'Browse Course Catalog', to: 'BrowseCatalog' },
       { icon: 'mdi-text-box-check-outline', text: 'Use Degree Requirements', to: 'RegisterDegree' },

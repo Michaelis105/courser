@@ -8,7 +8,7 @@ public interface CourseService {
 
     Course createCourse(Course newCourse);
     Course getCourseById(Integer id);
-    List<Course> getCoursesByAttributes(String subject, String number, String title, String credit);
+    List<Course> getCoursesByAttributes(String subject, String number, String title, String minCredit, String maxCredit);
     Course updateCourseById(Integer id, Course modifiedCourse);
     Course deleteCourseById(Integer id);
 

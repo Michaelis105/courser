@@ -43,7 +43,14 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<Course> getCoursesByAttributes(String subject, String number, String title, String credit) {
+    public Course getCourseIdByCourseNumber(Integer courseNumber) {
+        Map<String, String> params = new HashMap<>();
+        params.put("number", courseNumber.toString());
+        return jdbcTemplate.queryForObject(sqlGetCourseByCourseNumber, params, new CourseRowMapper());
+    }
+
+    @Override
+    public List<Course> getCoursesByAttributes(String subject, String number, String title, String minCredit, String maxCredit) {
         Map<String, String> params = new HashMap<>();
 
         String sqlByAttributes = sqlGetCourseRoot + " WHERE ";
@@ -70,8 +77,13 @@ public class CourseDaoImpl implements CourseDao {
             cond.add("TITLE LIKE :title");
         }
 
-        if (credit != null && !credit.isBlank()) {
-            params.put("credit", credit);
+        if (minCredit != null && !minCredit.isBlank() && maxCredit != null && !maxCredit.isBlank()) {
+            params.put("min_credit", minCredit);
+            params.put("max_credit", maxCredit);
+            cond.add("CREDIT >= :min_credit");
+            cond.add("CREDIT <= :max_credit");
+        } else if (minCredit != null && !minCredit.isBlank()) {
+            params.put("credit", minCredit);
             cond.add("CREDIT=:credit");
         }
 

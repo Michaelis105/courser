@@ -99,7 +99,7 @@
         openOnly: false,
 
         classTableHeaders: [
-          { text: 'Class ID', value: 'courseId' },
+          { text: 'Class ID', value: 'classId' },
           { text: 'Instructor', value: 'instructor' },
           { text: 'Availability', value: 'availability' },
           { text: 'Meeting Times', value: 'meeting' },
@@ -115,7 +115,7 @@
         courseCartItems: [],
 
         classCartTableHeaders: [
-          { text: 'Class ID', value: 'courseId' },
+          { text: 'Class ID', value: 'classId' },
           { text: 'Subject', value: 'subject' },
           { text: 'Course Number', value: 'number' },
           { text: 'Title', value: 'courseTitle' },
@@ -145,16 +145,28 @@
           this.snackbarText = "Please select a course to search from your cart."
           this.snackbar = true
         } else {
-          console.log(this.selected[0].courseId)
-          fetch("http://localhost:8080/api/v1/class", {
+          this.url = "http://localhost:8080/api/v1/class"
+          this.url += "?c=" + this.selected[0].number
+          if (this.daysSelected != null && this.daysSelected.length > 0) {
+            this.url += "&d=" + this.daysSelected
+          }
+
+          this.url += "&a=" + (this.openOnly ? "True" : "False")
+          
+          fetch(this.url, {
             method: "GET"
           })
           .then(response => response.json())
           .then((data) => {
             for (var i = 0; i < data.length; i++) {
               var curClass = data[i]
-              var classTime = curClass.classTimes[0]
-              var time = classTime.day + " " + classTime.startTime + " - " + classTime.endTime;
+              var time = ""
+              
+              for (var j = 0; j < curClass.classTimes.length; j++) {
+                var classTime = curClass.classTimes[j]
+                time += classTime.day + " " + classTime.startTime + " - " + classTime.endTime + "\n";
+              }
+              
               var avail = curClass.seatOccupied + " of " + curClass.seatCapacity;
               var wait = curClass.seatWaitlistOccupied + " of " + curClass.seatWaitlistCapacity;
               var aClass = {

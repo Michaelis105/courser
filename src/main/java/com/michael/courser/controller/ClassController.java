@@ -66,7 +66,7 @@ public class ClassController {
     public ResponseEntity<List<Class>> getClassesByAttributes(
             @RequestParam(value = "c", required = false) String courseId,
             @RequestParam(value = "i", required = false) String instructor,
-            @RequestParam(value = "d", required = false) List<Character> days,
+            @RequestParam(value = "d", required = false) String days,
             @RequestParam(value = "b", required = false) String beginTime,
             @RequestParam(value = "e", required = false) String endTime,
             @RequestParam(value = "a", required = false) Boolean isAvailable) {

@@ -8,9 +8,9 @@
               <v-card>
                 <v-subheader>Current Search Filters</v-subheader>
                 <v-combobox v-model="subjectSelect" :items="subjects" item-text="name" label="Subjects" multiple chips></v-combobox> <!-- :filter="customFilter" -->
-                <v-combobox v-model="courseLevelsSelect" :items="levels" item-text="name" label="Course Levels" multiple chips></v-combobox>
-                <v-autocomplete :disabled="!isEditing" :items="courseNumber" item-text="name" label="Course Number" hint="For example: 1234, 2350, 3870"></v-autocomplete>
-                <v-divider></v-divider>
+                <v-text-field v-model="courseNumberSelect" item-text="name" label="Course Number" hint="For example: 1234, 2350, 3***"></v-text-field>
+                <!--<v-autocomplete v-model="courseNumberSelect" :items="courseNumber" item-text="name" label="Course Number" hint="For example: 1234, 2350, 3870, 3***"></v-autocomplete>
+                <v-divider></v-divider>-->
                 <v-subheader>Credit Hour Range</v-subheader>
                 <v-card-text>
                   <v-range-slider v-model="creditHourRange" step="1" ticks="always" :max="19" thumb-label="always"></v-range-slider>
@@ -79,13 +79,17 @@
         subjectSelect: [],
         courseLevelsSelect: [],
         courseLevels: [],
+        courseNumberSelect: 0,
         creditHourRange: [0, 19],
         subjects: [
-          { name: 'Music', abbr: 'FL', id: 1 },
-          { name: 'Computer Science', abbr: 'GA', id: 2 },
-          { name: 'English', abbr: 'NE', id: 3 },
-          { name: 'Engineering', abbr: 'CA', id: 4 },
-          { name: 'Physics', abbr: 'NY', id: 5 },
+          { name: 'Chemistry', abbr: 'CHEM', id: 1 },
+          { name: 'English', abbr: 'ENGL', id: 2 },
+          { name: 'Engineering', abbr: 'ENGE', id: 3 },
+          { name: 'Math', abbr: 'MATH', id: 4 },
+          { name: 'Physics', abbr: 'PHYS', id: 5 },
+          { name: 'Computer Science', abbr: 'CS', id: 6 },
+          { name: 'Communications', abbr: 'COMM', id: 7 },
+          { name: 'Statistics', abbr: 'STAT', id: 8 },
         ],
 
         levels: [
@@ -123,12 +127,18 @@
       },
       search() {
         this.searchItems = []
-        fetch("http://localhost:8080/api/v1/course", {
+        this.url = "http://localhost:8080/api/v1/course"
+        this.url += "?s=" + this.subjectSelect[0].abbr
+        this.url += "&n=" + this.courseNumberSelect
+        this.url += "&minc=" + this.creditHourRange[0]
+        this.url += "&maxc=" + this.creditHourRange[1]
+        //url += "&t=" + courseNumberSelect
+        fetch(this.url, {
           method: "GET"
         })
         .then(response => response.json())
         .then((data) => {
-          this.searchItems = data;
+          this.searchItems = data
         })
       },
       addCourseToCart(course) {

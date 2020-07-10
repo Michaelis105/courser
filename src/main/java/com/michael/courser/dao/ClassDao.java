@@ -8,7 +8,7 @@ public interface ClassDao {
 
     Integer createClass(Class newClass);
     Class getClassById(Integer id);
-    List<Class> getClassesByAttributes(String courseId, String instructor, List<Character> days, String beginTime, String endTime, Boolean isAvailable);
+    List<Class> getClassesByAttributes(String courseId, String instructor, String days, String beginTime, String endTime, Boolean isAvailable);
     void updateClassById(Integer id, Class modifiedClass);
     void deleteClassById(Integer id);
 

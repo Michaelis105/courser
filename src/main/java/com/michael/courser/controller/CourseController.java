@@ -65,11 +65,12 @@ public class CourseController {
             @RequestParam(value = "s", required = true) String subject,
             @RequestParam(value = "n", required = false) String number,
             @RequestParam(value = "t", required = false) String title,
-            @RequestParam(value = "c", required = false) String credit) {
+            @RequestParam(value = "minc", required = false) String minCredit,
+            @RequestParam(value = "maxc", required = false) String maxCredit) {
         _log.trace("Enter...");
         List<Course> someCourse;
         try {
-            someCourse = courseService.getCoursesByAttributes(subject, number, title, credit);
+            someCourse = courseService.getCoursesByAttributes(subject, number, title, minCredit, maxCredit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

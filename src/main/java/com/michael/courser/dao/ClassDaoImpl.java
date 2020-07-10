@@ -42,7 +42,7 @@ public class ClassDaoImpl implements ClassDao {
     }
 
     @Override
-    public List<Class> getClassesByAttributes(String courseId, String instructor, List<Character> days, String beginTime, String endTime, Boolean isAvailable) {
+    public List<Class> getClassesByAttributes(String courseId, String instructor, String days, String beginTime, String endTime, Boolean isAvailable) {
         Map<String, String> params = new HashMap<>();
 
         String sqlByAttributes = sqlGetClassRoot + " WHERE ";
@@ -65,28 +65,29 @@ public class ClassDaoImpl implements ClassDao {
         }
 
         if (days != null) {
-            for (Character d : days) {
+            String[] daysParsed = days.split(",");
+            for (String d : daysParsed) {
                 int dbNum = 0; // Gets int that is compatible with DB
                 switch (d) {
-                    case 'M':
+                    case "M":
                         dbNum = 1;
                         break;
-                    case 'T':
+                    case "T":
                         dbNum = 2;
                         break;
-                    case 'W':
+                    case "W":
                         dbNum = 3;
                         break;
-                    case 'R':
+                    case "R":
                         dbNum = 4;
                         break;
-                    case 'F':
+                    case "F":
                         dbNum = 5;
                         break;
-                    case 'A':
+                    case "A":
                         dbNum = 6;
                         break;
-                    case 'U':
+                    case "U":
                         dbNum = 7;
                         break;
                     default:

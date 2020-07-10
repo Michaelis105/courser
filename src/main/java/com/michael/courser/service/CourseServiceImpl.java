@@ -58,10 +58,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCoursesByAttributes(String subject, String number, String title, String credit) {
+    public List<Course> getCoursesByAttributes(String subject, String number, String title, String minCredit, String maxCredit) {
         _log.trace("Enter...");
 
-        List<Course> coursesList = courseDao.getCoursesByAttributes(subject, number, title, credit);
+        List<Course> coursesList = courseDao.getCoursesByAttributes(subject, number, title, minCredit, maxCredit);
 
         /*
         Dummy data

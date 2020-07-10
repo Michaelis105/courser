@@ -1,16 +1,16 @@
 package com.michael.courser.service;
 
 import com.michael.courser.dao.ClassDao;
+import com.michael.courser.dao.CourseDao;
+import com.michael.courser.dao.PersonDao;
 import com.michael.courser.model.Class;
-import com.michael.courser.model.ClassTime;
+import com.michael.courser.model.Course;
+import com.michael.courser.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -20,6 +20,12 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     ClassDao classDao;
+
+    @Autowired
+    CourseDao courseDao;
+
+    @Autowired
+    PersonDao personDao;
 
     @Override
     public Class createClass(Class newClass) {
@@ -75,9 +81,17 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<Class> getClassesByAttributes(String courseId, String instructor, List<Character> days, String beginTime, String endTime, Boolean isAvailable) {
+    public List<Class> getClassesByAttributes(String courseId, String instructor, String days, String beginTime, String endTime, Boolean isAvailable) {
         _log.trace("Enter...");
-        List<Class> classList = classDao.getClassesByAttributes(courseId, instructor, days, beginTime, endTime, isAvailable);
+        Course course = courseDao.getCourseIdByCourseNumber(Integer.valueOf(courseId));
+
+        List<Class> classList = classDao.getClassesByAttributes(String.valueOf(course.getCourseId()), instructor, days, beginTime, endTime, isAvailable);
+
+        for (Class c : classList) {
+            Person person = personDao.getPersonById(Integer.parseInt(c.getInstructor()));
+            c.setInstructor(person.getFirstName() + " " + person.getLastName());
+        }
+
 
         /*
         Dummy data

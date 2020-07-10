@@ -14,5 +14,5 @@ public interface ClassService {
     Class registerClassById(Integer id);
     Class deregisterClassById(Integer id);
 
-    List<Class> getClassesByAttributes(String courseId, String instructor, List<Character> days, String beginTime, String endTime, Boolean isAvailable);
+    List<Class> getClassesByAttributes(String courseId, String instructor, String days, String beginTime, String endTime, Boolean isAvailable);
 }
