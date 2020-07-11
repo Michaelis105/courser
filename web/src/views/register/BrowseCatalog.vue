@@ -9,8 +9,6 @@
                 <v-subheader>Current Search Filters</v-subheader>
                 <v-combobox v-model="subjectSelect" :items="subjects" item-text="name" label="Subjects" multiple chips></v-combobox> <!-- :filter="customFilter" -->
                 <v-text-field v-model="courseNumberSelect" item-text="name" label="Course Number" hint="For example: 1234, 2350, 3***"></v-text-field>
-                <!--<v-autocomplete v-model="courseNumberSelect" :items="courseNumber" item-text="name" label="Course Number" hint="For example: 1234, 2350, 3870, 3***"></v-autocomplete>
-                <v-divider></v-divider>-->
                 <v-subheader>Credit Hour Range</v-subheader>
                 <v-card-text>
                   <v-range-slider v-model="creditHourRange" step="1" ticks="always" :max="19" thumb-label="always"></v-range-slider>

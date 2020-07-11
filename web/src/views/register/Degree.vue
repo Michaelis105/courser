@@ -24,17 +24,19 @@
     -->
 
     <div class="text-h2">What other circumstances do you want to consider?</div>
-    <RuleDialog/>
+    <RuleDialog v-on:addedRule="addRule"/>
     <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
             <th class="text-left">Rules</th>
+            <th class="text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in rules" :key="item.name">
-            <!--<td>{{ item.name }}</td>-->
+          <tr v-for="item in rules" :key="item.text">
+            <td>{{ item.text }}</td>
+            <v-icon small class="mr-2" @click="removeRule(item)">mdi-minus</v-icon>
           </tr>
         </tbody>
       </template>
@@ -69,7 +71,55 @@
     methods: {
       navigate(pathTo) {
         this.$router.push({ path: `${pathTo}`})
+      },
+      addRule(rule) {
+        var asText = "I ";
+        asText += (rule.want == "w") ? "want" : "do not want ";
+        if (rule.subject != null) {
+          asText += " to take ";
+          if (rule.subject == "any") {
+            asText += " any subject "
+          } else {
+            rule.subject.forEach(s => asText += s.abbr + ", ");
+          }
+          
+          asText += " for course number " + rule.course;
+        }
+        
+        if (rule.day != null) {
+          if (rule.day[0].value == "any") {
+            asText += " on any day ";
+          } else {
+            asText += " on "
+            rule.day.forEach(d => asText += d.text + ", ");
+          }
+        }
+        
+        if (rule.timeRel != null) {
+          if (rule.timeRel == "any") {
+            asText += " at any time ";
+          } else if (rule.timeRel == "b" || rule.timeRel == "a") {
+            if (rule.timeRel == "b") {
+              asText += " before ";
+            } else {
+              asText += " after ";
+            }
+            asText += rule.time;
+          } else if (rule.timeRel == "tr") {
+            asText += " between " + rule.beforeTime + " and " + rule.afterTime; 
+          }
+        }
+
+        var processedRule = {
+          text : asText,
+          rule : this.rule
+        }
+        this.rules.push(processedRule)
+      },
+      removeRule(rule) {
+        this.rules.splice(this.rules.indexOf(rule), 1)
       }
+
     }
   }
 </script>
