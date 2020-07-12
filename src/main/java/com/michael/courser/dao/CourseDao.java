@@ -10,6 +10,7 @@ public interface CourseDao {
     Course getCourseById(Integer id);
     Course getCourseIdByCourseNumber(Integer courseNumber);
     List<Course> getCoursesByAttributes(String subject, String number, String title, String minCredit, String maxCredit);
+    List<Course> getAllCourses();
     void updateCourseById(Integer id, Course modifiedCourse);
     void deleteCourseById(Integer id);
 

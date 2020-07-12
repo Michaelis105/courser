@@ -95,7 +95,10 @@
           translatedRules.push(newRule)
         }
 
-        this.url = "http://localhost:8080/api/v1/schedule?did=1"
+        var mnc = "&mnc=" + this.creditHourRange[0]
+        var mxc = "&mxc=" + this.creditHourRange[1]
+
+        this.url = "http://localhost:8080/api/v1/schedule?did=1" + mnc + mxc
         fetch(this.url, {
           headers: {
             'Accept': 'application/json',

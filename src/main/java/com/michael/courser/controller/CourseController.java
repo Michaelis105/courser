@@ -83,7 +83,7 @@ public class CourseController {
         _log.trace("Enter...");
         List<Course> someCourse;
         try {
-            someCourse = courseService.getCoursesByAttributes("", "", "", "", "");
+            someCourse = courseService.getAllCourses();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

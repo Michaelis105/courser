@@ -93,6 +93,10 @@ public class CourseDaoImpl implements CourseDao {
         return jdbcTemplate.query(sqlByAttributes + finalCond, params, new CourseRowMapper());
     }
 
+    @Override
+    public List<Course> getAllCourses() {
+        return jdbcTemplate.query(sqlGetCourseRoot, new CourseRowMapper());
+    }
 
 
     @Override

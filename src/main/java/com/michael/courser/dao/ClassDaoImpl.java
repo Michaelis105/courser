@@ -25,6 +25,7 @@ public class ClassDaoImpl implements ClassDao {
     String sqlInsertClass = "";
     String sqlGetClassRoot = "SELECT * FROM CLASS";
     String sqlGetClassById = "SELECT * FROM CLASS WHERE ID=:id";
+    String sqlGetClassesByCourseNumber = "SELECT CLASS.* FROM COURSE INNER JOIN CLASS ON COURSE.ID = CLASS.COURSE_ID WHERE NUMBER = :number";
     String sqlUpdateClass = "";
     String sqlDeleteClass = "";
 
@@ -64,7 +65,7 @@ public class ClassDaoImpl implements ClassDao {
             cond.add("INSTRUCTOR LIKE :instructor");
         }
 
-        if (days != null) {
+        if (days != null && !days.isBlank()) {
             String[] daysParsed = days.split(",");
             for (String d : daysParsed) {
                 int dbNum = 0; // Gets int that is compatible with DB
@@ -116,6 +117,13 @@ public class ClassDaoImpl implements ClassDao {
         _log.debug(sqlByAttributes + finalCond);
 
         return jdbcTemplate.query(sqlByAttributes + finalCond, params, new ClassRowMapper());
+    }
+
+    @Override
+    public List<Class> getClassesByCourseNumber(String courseNumber) {
+        Map<String, String> params = new HashMap<>();
+        params.put("number", courseNumber);
+        return jdbcTemplate.query(sqlGetClassesByCourseNumber, params, new ClassRowMapper());
     }
 
     @Override

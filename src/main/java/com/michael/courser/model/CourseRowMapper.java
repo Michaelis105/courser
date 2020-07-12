@@ -20,12 +20,14 @@ public class CourseRowMapper implements RowMapper<Course> {
         aCourse.setDescription(rs.getString("description"));
         aCourse.setUrl(rs.getString("url"));
 
-        String[] prereqsSplit = rs.getString("prerequisite").split(",");
-        List<Integer> prereqs = new LinkedList<>();
-        for (String sp : prereqsSplit) {
-            prereqs.add(Integer.valueOf(sp));
+        if (rs.getString("prerequisite") != null) {
+            String[] prereqsSplit = rs.getString("prerequisite").split(",");
+            List<Integer> prereqs = new LinkedList<>();
+            for (String sp : prereqsSplit) {
+                prereqs.add(Integer.valueOf(sp));
+            }
+            aCourse.setPrerequisiteIds(prereqs);
         }
-        aCourse.setPrerequisiteIds(prereqs);
 
         return aCourse;
     }

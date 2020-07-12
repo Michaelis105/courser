@@ -56,7 +56,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Schedule createScheduleByRules(Integer degreeId, Integer minCredit, Integer maxCredit, List<Rule> rules) {
         _log.trace("Enter...", degreeId);
 
-        List<Course> courseList = scheduleDao.getCoursesByDegreeRequirements(degreeId);
+        DegreeRequirements dr = scheduleDao.getCoursesByDegreeRequirements(degreeId);
+
+        List<Course> courseList = new LinkedList<>();
+        for (int i : dr.getCourseRequirements()) {
+             courseList.add(courseDao.getCourseById(i));
+        }
+
         List<Grade> takenCourses = studentDao.getGradesByStudentId(1);
 
         Set<Integer> takenCourseIds = new HashSet<>();
@@ -79,10 +85,12 @@ public class ScheduleServiceImpl implements ScheduleService {
             // Filter eligible courses per prerequisites.
             // If some degree required course A has prereq for some course B not yet credited, then remove course A.
             Set<Integer> preReqsLookup = new HashSet<>();
-            preReqsLookup.addAll(c.getPrerequisiteIds());
-            if (!takenCourseIds.containsAll(preReqsLookup)) {
-                itrc.remove();
-                continue;
+            if (c.getPrerequisiteIds() != null) {
+                preReqsLookup.addAll(c.getPrerequisiteIds());
+                if (!takenCourseIds.containsAll(preReqsLookup)) {
+                    itrc.remove();
+                    continue;
+                }
             }
 
             if (!satisfiesRules(c, rules)) {
@@ -96,10 +104,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         int totalCredit = 0;
         while (itrc.hasNext() && totalCredit < maxCredit) {
             Course c = itrc.next();
-            if (totalCredit + c.getCreditCount() <= maxCredit) {
+            if (totalCredit + c.getCreditCount() > maxCredit) {
                 continue;
             }
-            List<Class> classList = classDao.getClassesByAttributes(String.valueOf(c.getNumber()), "", "", "", "", true);
+            List<Class> classList = classDao.getClassesByCourseNumber(String.valueOf(c.getNumber()));
             for (Class cl : classList) {
                 if (satisfiesRules(cl, rules)) {
                     classesCart.add(cl);

@@ -21,9 +21,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api")
 @Api(description = "Set of endpoints for scheduling courses")
-public class SchedulerController {
+public class ScheduleController {
 
-    private final Logger _log = LoggerFactory.getLogger(SchedulerController.class);
+    private final Logger _log = LoggerFactory.getLogger(ScheduleController.class);
 
     @Autowired
     ScheduleService scheduleService;

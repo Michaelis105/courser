@@ -19,12 +19,12 @@ public class WebPageController {
 
     private final Logger _log = LoggerFactory.getLogger(WebPageController.class);
 
-    String dashboardPageFilename = "index.html";
+    String indexPageFilename = "index";
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    @ApiOperation(value = "Renders dashboard")
-    public String dashboard() {
-        _log.trace("Retrieving dashboard...");
-        return dashboardPageFilename;
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ApiOperation(value = "Renders UI")
+    public String index() {
+        _log.trace("Retrieving SPA...");
+        return indexPageFilename;
     }
 }

@@ -85,4 +85,11 @@ public class CourseServiceImpl implements CourseService {
         _log.trace("Exit...");
         return coursesList;
     }
+
+    public List<Course> getAllCourses() {
+        _log.trace("Enter...");
+        List<Course> coursesList = courseDao.getAllCourses();
+        _log.trace("Exit...");
+        return coursesList;
+    }
 }

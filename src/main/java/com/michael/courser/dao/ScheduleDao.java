@@ -1,10 +1,11 @@
 package com.michael.courser.dao;
 
 import com.michael.courser.model.Course;
+import com.michael.courser.model.DegreeRequirements;
 
 import java.util.List;
 
 public interface ScheduleDao {
 
-    List<Course> getCoursesByDegreeRequirements(int degreeId);
+    DegreeRequirements getCoursesByDegreeRequirements(int degreeId);
 }

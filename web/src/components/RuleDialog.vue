@@ -65,7 +65,7 @@
 
       times: [],
 
-      course: [],
+      course: "",
       courses: [
         { text: 'any', value: 'any' },
         { text: '1352', value: 'w' },
