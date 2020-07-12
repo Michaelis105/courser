@@ -4,7 +4,6 @@ import com.michael.courser.model.Class;
 import com.michael.courser.service.ClassService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +73,20 @@ public class ClassController {
         List<Class> someClass;
         try {
             someClass = classService.getClassesByAttributes(courseId, instructor, days, beginTime, endTime, isAvailable);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        _log.trace("Exit...", someClass);
+        return (someClass == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(someClass);
+    }
+
+    @RequestMapping(value = "/v1/class/all", method = RequestMethod.GET)
+    @ApiOperation(value = "Retrieves a list of all classes")
+    public ResponseEntity<List<Class>> getAllClasses() {
+        _log.trace("Enter...");
+        List<Class> someClass;
+        try {
+            someClass = classService.getClassesByAttributes("", "", "", "", "", false);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

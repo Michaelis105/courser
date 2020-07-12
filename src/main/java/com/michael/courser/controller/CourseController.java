@@ -4,7 +4,6 @@ import com.michael.courser.model.Course;
 import com.michael.courser.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +70,20 @@ public class CourseController {
         List<Course> someCourse;
         try {
             someCourse = courseService.getCoursesByAttributes(subject, number, title, minCredit, maxCredit);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        _log.trace("Exit...");
+        return (someCourse == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(someCourse);
+    }
+
+    @RequestMapping(value = "/v1/course/all", method = RequestMethod.GET)
+    @ApiOperation(value = "Retrieves a list of all courses.")
+    public ResponseEntity<List<Course>> getAllCourses() {
+        _log.trace("Enter...");
+        List<Course> someCourse;
+        try {
+            someCourse = courseService.getCoursesByAttributes("", "", "", "", "");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

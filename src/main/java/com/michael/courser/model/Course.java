@@ -20,22 +20,24 @@ public class Course {
     private String description;
     private String url;
 
+    private List<Integer> prerequisiteIds;
+
     public Course(Integer courseId) {
-        this(courseId, "SUBJ", 12345, "Some Title", 6, null, "No Description", "");
+        this(courseId, "SUBJ", 12345, "Some Title", 6, null, "No Description", "", null);
     }
 
     public Course(Integer courseId, String subject, Integer number, String courseTitle, int creditCount,
                   List<String> attributes) {
-        this(courseId, subject, number, courseTitle, creditCount, attributes, "", "");
+        this(courseId, subject, number, courseTitle, creditCount, attributes, "", "", null);
     }
 
     public Course(String subject, Integer number, String courseTitle, int creditCount,
                   List<String> attributes) {
-        this(1234, subject, number, courseTitle, creditCount, attributes, "", "");
+        this(1234, subject, number, courseTitle, creditCount, attributes, "", "", null);
     }
 
     public Course(Integer courseId, String subject, Integer number, String courseTitle, int creditCount,
-                  List<String> attributes, String description, String url) {
+                  List<String> attributes, String description, String url, List<Integer> prerequisiteIds) {
         this.courseId = courseId;
         this.subject = subject;
         this.number = number;
@@ -44,6 +46,7 @@ public class Course {
         this.attributes = attributes;
         this.description = description;
         this.url = url;
+        this.prerequisiteIds = prerequisiteIds;
     }
 
     public Integer getCourseId() {
@@ -82,9 +85,7 @@ public class Course {
         return creditCount;
     }
 
-    public void setCreditCount(int creditCount) {
-        this.creditCount = creditCount;
-    }
+    public void setCreditCount(Integer creditCount) { this.creditCount = creditCount; }
 
     public List<String> getAttributes() {
         return attributes;
@@ -109,6 +110,10 @@ public class Course {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public List<Integer> getPrerequisiteIds() { return prerequisiteIds; }
+
+    public void setPrerequisiteIds(List<Integer> prerequisiteIds) { this.prerequisiteIds = prerequisiteIds; }
 
     @Override
     public String toString() {

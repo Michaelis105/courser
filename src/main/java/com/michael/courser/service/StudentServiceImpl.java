@@ -1,12 +1,9 @@
 package com.michael.courser.service;
 
-import com.michael.courser.dao.StudentDao;
 import com.michael.courser.model.Class;
-
 import com.michael.courser.model.Schedule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
     public Schedule getStudentSchedule(Integer scheduleId) {
         _log.trace("Enter...", scheduleId);
         // TODO: IMPLEMENT
-        Schedule dummySchedule = new Schedule();
+        Schedule dummySchedule = null;
         _log.trace("Exit...");
         return dummySchedule;
     }
