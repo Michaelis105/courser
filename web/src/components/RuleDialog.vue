@@ -46,7 +46,7 @@
 
       want: null,
       wants: [
-        { text: 'want', value: 'w' },
+        //{ text: 'want', value: 'w' },
         { text: 'do not want', value: 'dnw' },
       ],
 
@@ -137,7 +137,7 @@
       },
       addRules() {
         var rule = {
-            want : this.want,
+            want: this.want,
             subject: this.subject,
             course: this.course,
             day: this.day,

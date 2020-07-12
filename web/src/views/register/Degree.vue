@@ -34,8 +34,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in rules" :key="item.text">
-            <td>{{ item.text }}</td>
+          <tr v-for="item in rulesText" :key="item">
+            <td>{{ item }}</td>
             <v-icon small class="mr-2" @click="removeRule(item)">mdi-minus</v-icon>
           </tr>
         </tbody>
@@ -44,7 +44,7 @@
     <v-divider></v-divider>
     <v-col cols="12" sm="4">
       <div>
-        <v-btn color="primary" v-on:click="navigate('/register/schedule')">Generate My Schedule</v-btn>
+        <v-btn color="primary" v-on:click="generateSchedule()">Generate My Schedule</v-btn>
       </div>
     </v-col>
   </v-container>
@@ -66,12 +66,52 @@
         radiosFocus: 'radio-ge',
         radiosCredits: 'radio-ftr',
         rules: [],
+        rulesText: [],
       }
     },
     methods: {
-      navigate(pathTo) {
-        this.$router.push({ path: `${pathTo}`})
+
+      generateSchedule() {
+
+        var translatedRules = []
+        for (var i = 0; i < this.rules.length; i++) {
+          var newSubjects = []
+          this.rules[i].subject.forEach(s => newSubjects.push(s.abbr));
+
+          var newDays = []
+          this.rules[i].day.forEach(d => newDays.push(d.text));
+
+          var newRule = {
+            want: this.rules[i].want,
+            subject: newSubjects,
+            course: this.rules[i].course,
+            day: newDays,
+            timeRel: this.rules[i].timeRel,
+            time: this.rules[i].time,
+            beforeTime: this.rules[i].beforeTime,
+            afterTime: this.rules[i].afterTime,
+          }
+
+          translatedRules.push(newRule)
+        }
+
+        this.url = "http://localhost:8080/api/v1/schedule?did=1"
+        fetch(this.url, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(translatedRules)
+        })
+        .then(response => response.json())
+        .then((data) => {          
+            console.log(data)
+        })
+
+        //this.$router.push({ name: 'Schedule', params: { cartCourses: this.cartItems } })
       },
+
       addRule(rule) {
         var asText = "I ";
         asText += (rule.want == "w") ? "want" : "do not want ";
@@ -110,14 +150,13 @@
           }
         }
 
-        var processedRule = {
-          text : asText,
-          rule : this.rule
-        }
-        this.rules.push(processedRule)
+        this.rulesText.push(asText)
+        this.rules.push(rule)
       },
       removeRule(rule) {
-        this.rules.splice(this.rules.indexOf(rule), 1)
+        var i = this.rulesText.indexOf(rule)
+        this.rules.splice(i, 1)
+        this.rulesText.splice(i, 1)
       }
 
     }
