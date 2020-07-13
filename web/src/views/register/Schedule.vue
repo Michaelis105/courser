@@ -84,10 +84,9 @@
     components: {
       ScheduleChangeConfirmationDialog
     },
-    props: [ 'cartCourses' ],
+    props: [ 'cartCourses', 'cartClasses' ],
     data () {
       return {
-        value: '',
         ready: false,
         hasSaved: false,
         isEditing: null,
@@ -101,8 +100,8 @@
         classTableHeaders: [
           { text: 'Class ID', value: 'classId' },
           { text: 'Instructor', value: 'instructor' },
-          { text: 'Availability', value: 'availability' },
           { text: 'Meeting Times', value: 'meeting' },
+          { text: 'Availability', value: 'availability' },
           { text: 'Waitlist', value: 'waitlist' },
           { text: 'Actions', value: 'actions' },
         ],
@@ -127,15 +126,13 @@
         removeClassesCart: [],
       }
     },
-    computed: {
-      cal () {
-        return this.ready ? this.$refs.calendar : null
-      },
-    },
     mounted () {
       this.ready = true
       if (this.cartCourses) {
         this.courseCartItems = this.cartCourses
+      }
+      if (this.cartClasses) {
+        this.classCartItems = this.cartClasses
       }
     },
     methods: {
@@ -179,7 +176,7 @@
               }
               this.classItems.push(aClass)
             }
-        })
+          })
         }
       },
       addClassToCart(aClass) {
@@ -190,7 +187,6 @@
           this.snackbarText = "Class already added!"
           this.snackbar = true
         }
-        
       },
       removeClassFromCart(aClass) {
         this.classCartItems.splice(this.classCartItems.indexOf(aClass), 1)

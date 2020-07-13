@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class ClassRowMapper implements RowMapper<Class> {
         aClass.setSeatOccupied(rs.getInt("seat_occupied"));
         aClass.setSeatWaitlistCapacity(rs.getInt("seat_waitlist_capacity"));
         aClass.setSeatOccupied(rs.getInt("seat_waitlist_occupied"));
+
+        aClass.setAttributes(new HashMap<>());
         return aClass;
     }
 

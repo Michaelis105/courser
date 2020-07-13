@@ -3,6 +3,7 @@ package com.michael.courser.model;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A class is a scheduled component instance of a course.
@@ -18,7 +19,7 @@ public class Class {
     private String campus;
     private String instructor;
 
-    private List<String> attributes;
+    private Map<String, String> attributes;
 
     private List<ClassTime> classTimes;
 
@@ -30,17 +31,17 @@ public class Class {
 
     public Class(Integer classId) {
         this(classId, 1234, "SUM2020", "U", "C", "First Name Last Name",
-                new LinkedList<String>(Arrays.asList("dummy")),null, 0, 0, 0, 0);
+                null,null, 0, 0, 0, 0);
     }
 
     public Class(Integer classId, Integer courseId, String term, String classType, String campus, String instructor,
-                 List<String> attributes, List<String> days) {
+                 Map<String, String> attributes, List<String> days) {
         this(classId, courseId, term, classType, campus, instructor, attributes, null,
                 0, 0, 0, 0);
     }
 
     public Class(Integer classId, Integer courseId, String term, String classType, String campus, String instructor,
-                 List<String> attributes, List<ClassTime> classTimes,
+                 Map<String, String> attributes, List<ClassTime> classTimes,
                  int seatCapacity, int seatOccupied, int seatWaitlistCapacity, int seatWaitlistOccupied) {
         this.classId = classId;
         this.courseId = courseId;
@@ -104,11 +105,11 @@ public class Class {
         this.instructor = instructor;
     }
 
-    public List<String> getAttributes() {
+    public Map<String, String> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(List<String> attributes) {
+    public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;
     }
 

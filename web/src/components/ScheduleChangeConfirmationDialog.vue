@@ -72,7 +72,7 @@
       return {
         dialog: false,
         classTableHeaders: [
-          { text: 'Class ID', value: 'courseId' },
+          { text: 'Class ID', value: 'classId' },
           { text: 'Subject', value: 'subject' },
           { text: 'Course Number', value: 'number' },
           { text: 'Title', value: 'courseTitle' },

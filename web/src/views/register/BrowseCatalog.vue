@@ -77,7 +77,7 @@
         subjectSelect: [],
         courseLevelsSelect: [],
         courseLevels: [],
-        courseNumberSelect: 0,
+        courseNumberSelect: "****",
         creditHourRange: [0, 19],
         subjects: [
           { name: 'Chemistry', abbr: 'CHEM', id: 1 },

@@ -7,10 +7,12 @@ public class Schedule {
     int id;
     Integer studentId;
     List<Class> classes;
+    List<Course> courses;
 
-    public Schedule(int id, Integer studentId, List<Class> classes) {
+    public Schedule(int id, Integer studentId, List<Course> courses, List<Class> classes) {
         this.id = id;
         this.studentId = studentId;
+        this.courses = courses;
         this.classes = classes;
     }
 
@@ -21,6 +23,10 @@ public class Schedule {
     public Integer getStudentId() { return studentId; }
 
     public void setStudentId(Integer studentId) { this.studentId = studentId; }
+
+    public List<Course> getCourses() { return courses; }
+
+    public void setCourses(List<Course> courses) { this.courses = courses; }
 
     public List<Class> getClasses() { return classes; }
 

@@ -47,6 +47,9 @@
         <v-btn color="primary" v-on:click="generateSchedule()">Generate My Schedule</v-btn>
       </div>
     </v-col>
+    <v-snackbar v-model="snackbar" :timeout=2000>
+      {{ snackbarText }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -67,6 +70,8 @@
         radiosCredits: 'radio-ftr',
         rules: [],
         rulesText: [],
+        snackbar: false,
+        snackbarText: "",
       }
     },
     methods: {
@@ -74,45 +79,93 @@
       generateSchedule() {
 
         var translatedRules = []
-        for (var i = 0; i < this.rules.length; i++) {
-          var newSubjects = []
-          this.rules[i].subject.forEach(s => newSubjects.push(s.abbr));
+        if (this.rules.length == 0) {
+          this.snackbarText = "Please add at least one rule."
+          this.snackbar = true
+        } else {
+          for (var i = 0; i < this.rules.length; i++) {
+            var newSubjects = []
+            this.rules[i].subject.forEach(s => newSubjects.push(s.abbr));
 
-          var newDays = []
-          this.rules[i].day.forEach(d => newDays.push(d.text));
+            var newDays = []
+            this.rules[i].day.forEach(d => newDays.push(d.text));
 
-          var newRule = {
-            want: this.rules[i].want,
-            subject: newSubjects,
-            course: this.rules[i].course,
-            day: newDays,
-            timeRel: this.rules[i].timeRel,
-            time: this.rules[i].time,
-            beforeTime: this.rules[i].beforeTime,
-            afterTime: this.rules[i].afterTime,
+            var newRule = {
+              want: this.rules[i].want,
+              subject: newSubjects,
+              course: this.rules[i].course,
+              day: newDays,
+              timeRel: this.rules[i].timeRel,
+              time: this.rules[i].time,
+              beforeTime: this.rules[i].beforeTime,
+              afterTime: this.rules[i].afterTime,
+            }
+
+            translatedRules.push(newRule)
           }
 
-          translatedRules.push(newRule)
+          switch (this.radiosCredits) {
+              case "radio-ftl":
+                this.creditHourRange[0] = 12;
+                this.creditHourRange[1] = 13;
+                break;
+              case "radio-ftr":
+                this.creditHourRange[0] = 14;
+                this.creditHourRange[1] = 16;
+                break;
+              case "radio-fth":
+                this.creditHourRange[0] = 17;
+                this.creditHourRange[1] = 19;
+                break;
+              default:
+                this.creditHourRange[0] = 0;
+                this.creditHourRange[1] = 19;
+          }
+
+          var mnc = "&mnc=" + this.creditHourRange[0]
+          var mxc = "&mxc=" + this.creditHourRange[1]
+
+          this.url = "http://localhost:8080/api/v1/schedule?did=1" + mnc + mxc
+          fetch(this.url, {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(translatedRules)
+          })
+          .then(response => response.json())
+          .then((data) => {
+
+            for (var i = 0; i < data.classes.length; i++) {
+              var curClass = data.classes[i]
+
+              var time = ""
+              for (var j = 0; j < curClass.classTimes.length; j++) {
+                var classTime = curClass.classTimes[j]
+                time += classTime.day + " " + classTime.startTime + " - " + classTime.endTime + "\n";
+              }
+              
+              var avail = curClass.seatOccupied + " of " + curClass.seatCapacity;
+              var wait = curClass.seatWaitlistOccupied + " of " + curClass.seatWaitlistCapacity;
+
+              curClass.availability = avail;
+              curClass.meeting = time;
+              curClass.waitlist = wait;
+
+              curClass.subject = curClass.attributes.subject;
+              curClass.number = curClass.attributes.number;
+              curClass.courseTitle = curClass.attributes.courseTitle;
+              curClass.instructor = curClass.attributes.instructor;
+              curClass.creditHours = curClass.attributes.creditHours;
+            }
+
+            this.$router.push({ name: 'Schedule', params: { 
+              cartCourses: data.courses,
+              cartClasses: data.classes 
+            }})
+          })
         }
-
-        var mnc = "&mnc=" + this.creditHourRange[0]
-        var mxc = "&mxc=" + this.creditHourRange[1]
-
-        this.url = "http://localhost:8080/api/v1/schedule?did=1" + mnc + mxc
-        fetch(this.url, {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          body: JSON.stringify(translatedRules)
-        })
-        .then(response => response.json())
-        .then((data) => {          
-            console.log(data)
-        })
-
-        //this.$router.push({ name: 'Schedule', params: { cartCourses: this.cartItems } })
       },
 
       addRule(rule) {

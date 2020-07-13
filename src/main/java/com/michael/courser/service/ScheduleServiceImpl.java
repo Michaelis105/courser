@@ -1,9 +1,6 @@
 package com.michael.courser.service;
 
-import com.michael.courser.dao.ClassDao;
-import com.michael.courser.dao.CourseDao;
-import com.michael.courser.dao.ScheduleDao;
-import com.michael.courser.dao.StudentDao;
+import com.michael.courser.dao.*;
 import com.michael.courser.model.*;
 import com.michael.courser.model.Class;
 import org.slf4j.Logger;
@@ -29,6 +26,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
+    PersonDao personDao;
 
     @Override
     public Schedule createSchedule(Schedule newCourse) {
@@ -112,12 +112,18 @@ public class ScheduleServiceImpl implements ScheduleService {
                 if (satisfiesRules(cl, rules)) {
                     classesCart.add(cl);
                     totalCredit += c.getCreditCount();
+                    cl.getAttributes().put("subject", String.valueOf(c.getSubject()));
+                    cl.getAttributes().put("number", String.valueOf(c.getNumber()));
+                    cl.getAttributes().put("courseTitle", String.valueOf(c.getCourseTitle()));
+                    Person instru = personDao.getPersonById(Integer.valueOf(cl.getInstructor()));
+                    cl.getAttributes().put("instructor", instru.getFirstName() + " " + instru.getLastName());
+                    cl.getAttributes().put("creditHours", String.valueOf(c.getCreditCount()));
                     break;
                 }
             }
         }
 
-        Schedule schedule = new Schedule(-1, -1, classesCart);
+        Schedule schedule = new Schedule(-1, -1, courseList, classesCart);
 
         _log.trace("Exit...");
         return schedule;
