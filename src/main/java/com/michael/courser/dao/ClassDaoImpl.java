@@ -49,7 +49,7 @@ public class ClassDaoImpl implements ClassDao {
         String sqlByAttributes = sqlGetClassRoot + " WHERE ";
         List<String> cond = new LinkedList<>();
 
-        if (courseId != null && !courseId.isBlank()) {
+        if (courseId != null) {
             if (courseId.contains("*")) {
                 courseId = courseId.replace("*", "");
                 params.put("course_id", courseId + "%");
@@ -60,12 +60,12 @@ public class ClassDaoImpl implements ClassDao {
             }
         }
 
-        if (instructor != null && !instructor.isBlank()) {
+        if (instructor != null) {
             params.put("instructor", instructor + "%");
             cond.add("INSTRUCTOR LIKE :instructor");
         }
 
-        if (days != null && !days.isBlank()) {
+        if (days != null) {
             String[] daysParsed = days.split(",");
             for (String d : daysParsed) {
                 int dbNum = 0; // Gets int that is compatible with DB
@@ -99,12 +99,12 @@ public class ClassDaoImpl implements ClassDao {
             }
         }
 
-        if (beginTime != null && !beginTime.isBlank()) {
+        if (beginTime != null) {
             params.put("class_time_begin", beginTime);
             cond.add("CLASS_TIME_BEGIN >= :class_time_begin");
         }
 
-        if (endTime != null && !endTime.isBlank()) {
+        if (endTime != null) {
             params.put("class_time_end", endTime);
             cond.add("CLASS_TIME_END <= :class_time_end");
         }

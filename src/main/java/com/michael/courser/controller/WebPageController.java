@@ -19,7 +19,7 @@ public class WebPageController {
 
     private final Logger _log = LoggerFactory.getLogger(WebPageController.class);
 
-    String indexPageFilename = "index";
+    String indexPageFilename = "index.html";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ApiOperation(value = "Renders UI")

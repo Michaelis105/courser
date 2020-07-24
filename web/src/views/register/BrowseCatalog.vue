@@ -125,7 +125,7 @@
       },
       search() {
         this.searchItems = []
-        this.url = "http://localhost:8080/api/v1/course"
+        this.url = "http://michaellouie.net/api/v1/course"
         this.url += "?s=" + this.subjectSelect[0].abbr
         this.url += "&n=" + this.courseNumberSelect
         this.url += "&minc=" + this.creditHourRange[0]

@@ -142,7 +142,7 @@
           this.snackbarText = "Please select a course to search from your cart."
           this.snackbar = true
         } else {
-          this.url = "http://localhost:8080/api/v1/class"
+          this.url = "http://michaellouie.net/api/v1/class"
           this.url += "?c=" + this.selected[0].number
           if (this.daysSelected != null && this.daysSelected.length > 0) {
             this.url += "&d=" + this.daysSelected

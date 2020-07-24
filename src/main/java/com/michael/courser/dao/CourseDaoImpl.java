@@ -55,12 +55,12 @@ public class CourseDaoImpl implements CourseDao {
 
         String sqlByAttributes = sqlGetCourseRoot + " WHERE ";
         List<String> cond = new LinkedList<>();
-        if (subject != null && !subject.isBlank()) {
+        if (subject != null) {
             params.put("subject", subject);
             cond.add("SUBJECT=:subject");
         }
 
-        if (number != null && !number.isBlank()) {
+        if (number != null) {
             if (number.contains("*")) {
                 number = number.replace("*", "");
                 params.put("number", number + "%");
@@ -72,17 +72,17 @@ public class CourseDaoImpl implements CourseDao {
 
         }
 
-        if (title != null && !title.isBlank()) {
+        if (title != null) {
             params.put("title", title + "%");
             cond.add("TITLE LIKE :title");
         }
 
-        if (minCredit != null && !minCredit.isBlank() && maxCredit != null && !maxCredit.isBlank()) {
+        if (minCredit != null && maxCredit != null) {
             params.put("min_credit", minCredit);
             params.put("max_credit", maxCredit);
             cond.add("CREDIT >= :min_credit");
             cond.add("CREDIT <= :max_credit");
-        } else if (minCredit != null && !minCredit.isBlank()) {
+        } else if (minCredit != null) {
             params.put("credit", minCredit);
             cond.add("CREDIT=:credit");
         }
