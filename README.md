@@ -12,6 +12,6 @@ To build and package the UI and web server as a single deliverable:
 3.	Compile and minify project for production (`npm run build`).
 4.	Copy all files and directories under `dist/` to Java static resources directory under `src/main/resources/static`. You may need to create the static directory.
 5.	Navigate to `courser/` (project root).
-6.	Build the jar (`./gradlew`)
+6.	Build the jar (`./gradlew bootJar`)
 7.	Copy the output jar located in `courser/build/libs/courser-0.0.1.jar` to the target environment where it will run.
 8.	Run the jar (`java -jar courser-0.0.1.jar`). The web server should now answer REST requests and return the UI.
