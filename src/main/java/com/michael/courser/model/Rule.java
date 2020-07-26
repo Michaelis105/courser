@@ -64,7 +64,7 @@ public class Rule {
             if (sub.equals(subj) || sub.equals("any")) {
                 for (ClassTime ct : c.getClassTimes()) {
                     for (String da : day) {
-                        if (da.equals(ct.getDay().getDisplayName(TextStyle.FULL, Locale.getDefault()))) {
+                        if (da.equals(ct.getDay().getDisplayName(TextStyle.FULL, Locale.getDefault())) || da.equals("any")) {
 
                             LocalTime st = ct.getStartTime();
                             LocalTime et = ct.getEndTime();

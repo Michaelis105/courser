@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -64,6 +65,31 @@ public class ScheduleServiceImpl implements ScheduleService {
             }
         }
         return true;
+    }
+
+    private boolean checkConflictingTimes(Class c1, Class c2) {
+        for (ClassTime ct1 : c1.getClassTimes()) {
+            for (ClassTime ct2 : c2.getClassTimes()) {
+                if (ct1.getDay().equals(ct2.getDay())) {
+
+                    LocalTime st1 = ct1.getStartTime();
+                    LocalTime et1 = ct1.getEndTime();
+                    int stc1 = st1.getHour()*100 + st1.getMinute();
+                    int etc1 = et1.getHour()*100 + et1.getMinute();
+
+                    LocalTime st2 = ct2.getStartTime();
+                    LocalTime et2 = ct2.getEndTime();
+                    int stc2 = st2.getHour()*100 + st2.getMinute();
+                    int etc2 = et2.getHour()*100 + et2.getMinute();
+
+                    // Two time ranges conflict if one endpoint is within the range of another.
+                    if (stc1 >= stc2 && stc1 <= etc2 || etc1 >= stc2 && etc1 <= etc2 ) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -133,9 +159,21 @@ public class ScheduleServiceImpl implements ScheduleService {
                 cl.getAttributes().put("instructor", instru.getFirstName() + " " + instru.getLastName());
                 cl.getAttributes().put("creditHours", String.valueOf(c.getCreditCount()));
                 if (satisfiesRules(cl, rules)) {
-                    classesCart.add(cl);
-                    totalCredit += c.getCreditCount();
-                    break;
+
+                    Iterator<Class> itrcl = classesCart.iterator();
+                    boolean conflict = false;
+                    while (itrcl.hasNext()) {
+                        if (checkConflictingTimes(cl, itrcl.next())) {
+                            conflict = true;
+                            break;
+                        }
+                    }
+
+                    if (!conflict) {
+                        classesCart.add(cl);
+                        totalCredit += c.getCreditCount();
+                        break;
+                    }
                 }
             }
         }
