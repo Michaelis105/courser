@@ -38,16 +38,30 @@ public class ScheduleServiceImpl implements ScheduleService {
         return schedule;
     }
 
+    /**
+     * A course satisfying a "do not want" rule means it should not be taken regardless of other rules.
+     * A course satisfying a "want" rule means it should be taken.
+     * Else, this course has no preference and can be taken.
+     *
+     * Rules precedence in order as they were defined.
+     * @param c a course in question
+     * @param rules criteria dictating whether this course is related to the rule regarding its course attributes.
+     * @return true if satisfty rules, false otherwise. See description above.
+     */
     private boolean satisfiesRules(Course c, List<Rule> rules) {
         for (Rule r : rules) {
-            if (!r.doesCourseSatisfyRule(c)) return false;
+            if (r.doesCourseSatisfyRule(c)) {
+                return (r.getWant() == "w") ? true : false;
+            }
         }
         return true;
     }
 
     private boolean satisfiesRules(Class c, List<Rule> rules) {
         for (Rule r : rules) {
-            if (!r.doesClassSatisfyRule(c)) return false;
+            if (r.doesClassSatisfyRule(c)) {
+                return (r.getWant() == "w") ? true : false;
+            }
         }
         return true;
     }
@@ -64,7 +78,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         List<Grade> takenCourses = studentDao.getGradesByStudentId(1);
-
         Set<Integer> takenCourseIds = new HashSet<>();
         for (Grade g : takenCourses) {
             takenCourseIds.add(g.getCourseId());
@@ -104,20 +117,24 @@ public class ScheduleServiceImpl implements ScheduleService {
         int totalCredit = 0;
         while (itrc.hasNext() && totalCredit < maxCredit) {
             Course c = itrc.next();
+
             if (totalCredit + c.getCreditCount() > maxCredit) {
+                // While this course places total credits over maximum rule, there might be some other course
+                // with less credits that still places total credits under maximum rule.
                 continue;
             }
+
             List<Class> classList = classDao.getClassesByCourseNumber(String.valueOf(c.getNumber()));
             for (Class cl : classList) {
+                cl.getAttributes().put("subject", String.valueOf(c.getSubject()));
+                cl.getAttributes().put("number", String.valueOf(c.getNumber()));
+                cl.getAttributes().put("courseTitle", String.valueOf(c.getCourseTitle()));
+                Person instru = personDao.getPersonById(Integer.valueOf(cl.getInstructor()));
+                cl.getAttributes().put("instructor", instru.getFirstName() + " " + instru.getLastName());
+                cl.getAttributes().put("creditHours", String.valueOf(c.getCreditCount()));
                 if (satisfiesRules(cl, rules)) {
                     classesCart.add(cl);
                     totalCredit += c.getCreditCount();
-                    cl.getAttributes().put("subject", String.valueOf(c.getSubject()));
-                    cl.getAttributes().put("number", String.valueOf(c.getNumber()));
-                    cl.getAttributes().put("courseTitle", String.valueOf(c.getCourseTitle()));
-                    Person instru = personDao.getPersonById(Integer.valueOf(cl.getInstructor()));
-                    cl.getAttributes().put("instructor", instru.getFirstName() + " " + instru.getLastName());
-                    cl.getAttributes().put("creditHours", String.valueOf(c.getCreditCount()));
                     break;
                 }
             }

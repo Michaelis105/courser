@@ -1,6 +1,5 @@
 package com.michael.courser.model;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -60,51 +59,54 @@ public class Rule {
     public void setAfterTime(Integer afterTime) { this.afterTime = afterTime; }
 
     public boolean doesClassSatisfyRule(Class c) {
-        boolean meets = false;
+        String sub = c.getAttributes().get("subject");
+        for (String subj : subject) {
+            if (sub.equals(subj) || sub.equals("any")) {
+                for (ClassTime ct : c.getClassTimes()) {
+                    for (String da : day) {
+                        if (da.equals(ct.getDay().getDisplayName(TextStyle.FULL, Locale.getDefault()))) {
 
-        for (ClassTime ct : c.getClassTimes()) {
-            for (String da : day) {
-                if (da.equals(ct.getDay().getDisplayName(TextStyle.FULL, Locale.getDefault()))) {
+                            LocalTime st = ct.getStartTime();
+                            LocalTime et = ct.getEndTime();
+                            int stc = st.getHour()*100 + st.getMinute();
+                            int etc = et.getHour()*100 + et.getMinute();
 
-                    LocalTime st = ct.getStartTime();
-                    LocalTime et = ct.getEndTime();
-                    int stc = st.getHour()*100 + st.getMinute();
-                    int etc = et.getHour()*100 + et.getMinute();
-
-                    switch (timeRel) {
-                        case "any":
-                            meets = true;
-                            break;
-                        case "b":
-                            meets |= stc <= time && etc <= time;
-                            break;
-                        case "a":
-                            meets |= stc >= time && etc >= time;
-                            break;
-                        case "tr":
-                            meets |= stc >= beforeTime && etc <= afterTime;
-                            break;
-                        default:
-                            break;
+                            switch (timeRel) {
+                                case "any":
+                                    return true;
+                                case "b":
+                                    if (stc <= time && etc <= time) return true;
+                                    break;
+                                case "a":
+                                    if (stc >= time && etc >= time) return true;
+                                    break;
+                                case "tr":
+                                    if (stc >= beforeTime && etc <= afterTime) return true;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
                 }
             }
         }
 
-        return (want == "w") ? meets : !meets;
+        return false;
     }
 
     public boolean doesCourseSatisfyRule(Course c) {
         boolean meets = false;
         for (String s : subject) {
-            if (s == c.getSubject()) {
+            if (s == c.getSubject() || s == "any") {
                 meets = true;
                 break;
             }
         }
+
         meets &= Integer.getInteger(course) == c.getNumber();
 
-        return (want == "w") ? meets : !meets;
+        return meets;
     }
 
 
